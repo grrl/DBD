@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1401
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dead by Daylight", "Dead by Daylight\Dead by Daylight.vcxproj", "{BA49EC10-6445-45AE-B96B-D750BEB28143}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KMDF Driver", "KMDF Driver\KMDF Driver.vcxproj", "{D4F81B31-6125-465C-99B6-DD112B4906D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Debug|ARM.ActiveCfg = Debug|Win32
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Debug|ARM64.ActiveCfg = Debug|Win32
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Debug|x64.ActiveCfg = Debug|x64
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Debug|x64.Build.0 = Debug|x64
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Debug|x86.ActiveCfg = Debug|Win32
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Debug|x86.Build.0 = Debug|Win32
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Release|ARM.ActiveCfg = Release|Win32
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Release|ARM64.ActiveCfg = Release|Win32
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Release|x64.ActiveCfg = Release|x64
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Release|x64.Build.0 = Release|x64
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Release|x86.ActiveCfg = Release|Win32
+		{BA49EC10-6445-45AE-B96B-D750BEB28143}.Release|x86.Build.0 = Release|Win32
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|ARM.ActiveCfg = Debug|ARM
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|ARM.Build.0 = Debug|ARM
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|ARM.Deploy.0 = Debug|ARM
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|ARM64.Build.0 = Debug|ARM64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|x64.ActiveCfg = Debug|x64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|x64.Build.0 = Debug|x64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|x64.Deploy.0 = Debug|x64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|x86.ActiveCfg = Debug|Win32
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|x86.Build.0 = Debug|Win32
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Debug|x86.Deploy.0 = Debug|Win32
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|ARM.ActiveCfg = Release|ARM
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|ARM.Build.0 = Release|ARM
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|ARM.Deploy.0 = Release|ARM
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|ARM64.ActiveCfg = Release|ARM64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|ARM64.Build.0 = Release|ARM64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|ARM64.Deploy.0 = Release|ARM64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|x64.ActiveCfg = Release|x64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|x64.Build.0 = Release|x64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|x64.Deploy.0 = Release|x64
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|x86.ActiveCfg = Release|Win32
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|x86.Build.0 = Release|Win32
+		{D4F81B31-6125-465C-99B6-DD112B4906D6}.Release|x86.Deploy.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAF4562B-3836-4535-9343-0FA3646AF958}
+	EndGlobalSection
+EndGlobal
