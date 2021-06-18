@@ -4,9 +4,12 @@
 #include "macro.h"
 
 HWND hGameWnd;
-const static int Uworld = 0x8CFAF00;
-const static int Gnames = 0x8B2B940;
-
+const static int uworld_offset = 0x8CFAF00;
+const static int gnames_offset = 0x8B2B940;
+const static int persistentlevel_offset = 0x38;
+const static int actors_offset = 0xa0;
+const static int actor_count_offset = 0xa8;
+QWORD uworld;
 int main() {
 
 	AllocConsole();
@@ -64,6 +67,10 @@ int main() {
 	std::cout << ("ProcessID: ") << Kernel::ProcessID << std::endl;
 	//std::cout << ("GameBase: 0x") << std::uppercase << std::hex << Kernel::GameModule << std::endl;
 	std::cout << "GameBase: " << Kernel::GameModule << std::endl;
+
+	uworld = Kernel::KeReadVirtualMemory<QWORD>(Kernel::GameModule + uworld_offset);
+
+	std::cout << "uworld " << uworld << std::endl;
 
 	system("pause");
 }
