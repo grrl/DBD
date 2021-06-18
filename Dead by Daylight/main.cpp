@@ -4,6 +4,8 @@
 #include "macro.h"
 
 HWND hGameWnd;
+const static int Uworld = 0x8CFAF00;
+const static int Gnames = 0x8B2B940;
 
 int main() {
 
@@ -50,7 +52,6 @@ int main() {
 
 	std::cout << "processid: " << Kernel::ProcessID << std::endl;
 
-	system("pause");
 	info_t Input_Output_Data;
 	Input_Output_Data.pid = Kernel::ProcessID;
 	DWORD Readed_Bytes_Amount;
@@ -64,5 +65,5 @@ int main() {
 	//std::cout << ("GameBase: 0x") << std::uppercase << std::hex << Kernel::GameModule << std::endl;
 	std::cout << "GameBase: " << Kernel::GameModule << std::endl;
 
-
+	system("pause");
 }
