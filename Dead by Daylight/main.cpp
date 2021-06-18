@@ -43,6 +43,11 @@ int main() {
 		exit(0);
 	}
 	
+	GetWindowThreadProcessId(hGameWnd, &Kernel::ProcessID);
+
+	if (Kernel::ProcessID == NULL)
+		exit(0);
+
 	info_t Input_Output_Data;
 	Input_Output_Data.pid = Kernel::ProcessID;
 	DWORD Readed_Bytes_Amount;
