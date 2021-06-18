@@ -48,6 +48,9 @@ int main() {
 	if (Kernel::ProcessID == NULL)
 		exit(0);
 
+	std::cout << "processid: " << Kernel::ProcessID << std::endl;
+
+	system("pause");
 	info_t Input_Output_Data;
 	Input_Output_Data.pid = Kernel::ProcessID;
 	DWORD Readed_Bytes_Amount;
