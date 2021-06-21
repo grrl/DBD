@@ -84,15 +84,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		Sleep(2000);
 		exit(0);
 	}
-	//else {
-		//std::cout << _xor_("Driver Loaded! \n") << std::endl;
-	//}
+
+	std::cout << "handleok: " << Kernel::hKernelDriver << std::endl;
 
 	while (hGameWnd == NULL)
 	{
 		hGameWnd = FindWindow(0, Kernel::WINDOWNAME);
 		Sleep(1000);
 	}
+	std::cout << "hwnd: " << hGameWnd << std::endl;
 
 	if (hGameWnd == NULL)
 	{
@@ -103,6 +103,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	GetWindowThreadProcessId(hGameWnd, &Kernel::ProcessID);
+
+	if (Kernel::ProcessID == NULL)
+		exit(0);
+
+	std::cout << "processid: " << Kernel::ProcessID << std::endl;
 
 	info_t Input_Output_Data;
 	Input_Output_Data.pid = Kernel::ProcessID;
@@ -117,23 +122,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//std::cout << ("GameBase: 0x") << std::uppercase << std::hex << Kernel::GameModule << std::endl;
 	std::cout << "GameBase: " << Kernel::GameModule << std::endl;
 
-	/*
-	HWND MyWindowHwnd = FindWindowA(0, "Apex Legends");
 
-
-	//hnd = CreateThread(NULL, // security attributes ( default if NULL )
-	//	0, // stack SIZE default if 0
-	//	(LPTHREAD_START_ROUTINE)thread, // Start Address
-	//	NULL, // input data
-	//	0, // creational flag ( start if  0 )
-	//	&id); // thread ID
-
-	RECT rect;
-	if (GetClientRect(MyWindowHwnd, &rect)) {
-		clientWidth = rect.right - rect.left;
-		clientHeight = rect.bottom - rect.top;
-	};
-	*/
 	WNDCLASSEXA OverlayWnd; // contains window class information
 	OverlayWnd.cbSize = sizeof(WNDCLASSEXA); // size of struct, basically checking for version or check
 	OverlayWnd.style = CS_HREDRAW | CS_VREDRAW;  // Style, redraw method type
@@ -244,79 +233,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 int entityloop() {
 
-	AllocConsole();
-	freopen("conin$", "r", stdin);
-	freopen("conout$", "w", stdout);
-	freopen("conout$", "w", stderr);
-	printf("Debugging Window:\n");
-
-	Kernel::hKernelDriver = CreateFileA(("\\\\.\\NEET"), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, OPEN_EXISTING, 0, 0);
-
-	if (Kernel::hKernelDriver == INVALID_HANDLE_VALUE)
-	{
-		std::cout << "Driver not loaded Exit in 2 Secs..." << std::endl;
-		Sleep(2000);
-		exit(0);
-	}
 	
-	std::cout << "handleok: " << Kernel::hKernelDriver << std::endl;
-
-	//else {
-		//std::cout << _xor_("Driver Loaded! \n") << std::endl;
-	//}
-
-	while (hGameWnd == NULL)
-	{
-		hGameWnd = FindWindow(0, Kernel::WINDOWNAME);
-		Sleep(1000);
-	}
-	std::cout << "hwnd: " << hGameWnd << std::endl;
-
-	if (hGameWnd == NULL)
-	{
-		std::cout << "Window %s Not FOUND Exiting......" << std::endl;
-
-		Sleep(1000);
-		exit(0);
-	}
-	
-	GetWindowThreadProcessId(hGameWnd, &Kernel::ProcessID);
-
-	if (Kernel::ProcessID == NULL)
-		exit(0);
-
-	std::cout << "processid: " << Kernel::ProcessID << std::endl;
-
-	info_t Input_Output_Data;
-	Input_Output_Data.pid = Kernel::ProcessID;
-	DWORD Readed_Bytes_Amount;
-
-	DeviceIoControl(Kernel::hKernelDriver, ctl_base, &Input_Output_Data, sizeof Input_Output_Data, &Input_Output_Data, sizeof Input_Output_Data, &Readed_Bytes_Amount, nullptr);
-	Kernel::GameModule = (QWORD)Input_Output_Data.data;
-
-	//DumpEXE(GameModule);
-
-	std::cout << ("ProcessID: ") << Kernel::ProcessID << std::endl;
-	//std::cout << ("GameBase: 0x") << std::uppercase << std::hex << Kernel::GameModule << std::endl;
-	std::cout << "GameBase: " << Kernel::GameModule << std::endl;
 
 	uworld = Kernel::KeReadVirtualMemory<QWORD>(Kernel::GameModule + uworld_offset);
 
 	std::cout << "uworld " << uworld << std::endl;
+
+	if (uworld == NULL)
+		return;
 
 	/*uintptr_t Actors = 
 	D.RPM<uintptr_t>(
 	D.RPM<uintptr_t>(
 	D.RPM<uintptr_t>(
 	D.RPM<uintptr_t>(BaseAddress + Offsets::Uworld) + Offsets::PersistentLevel) + Offsets::ActorCluster) + Offsets::Actors);
-
-
 	*/
 
 	persistentlevel = Kernel::KeReadVirtualMemory<uintptr_t>(uworld + persistentlevel_offset);
 
-	if(persistentlevel == NULL)
-		system("pause");
+	if (persistentlevel == NULL)
+		return;
 
 	std::cout << "persistentlevel: " << persistentlevel << std::endl;
 
@@ -329,14 +265,14 @@ int entityloop() {
 	actors = Kernel::KeReadVirtualMemory<uintptr_t>(persistentlevel + actors_offset);
 
 	if (actors == NULL)
-		system("pause");
+		return;
 
 	std::cout << "actors: " << actors << std::endl;
 
 	actor_count = Kernel::KeReadVirtualMemory<int>(persistentlevel + actor_count_offset);
 
 	if (actor_count == NULL)
-		system("pause");
+		return;
 
 	std::cout << "actorcount: " << actor_count << std::endl;
 
