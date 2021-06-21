@@ -8,6 +8,7 @@
 #include "w2s.h"
 #include "fvector.h"
 #include "d3d9.h"
+#include "draw.h"
 
 #include <imgui.h>
 #include "imgui_impl_dx9.h"
@@ -332,13 +333,14 @@ int entityloop() {
 		if (loc.X > 0 && loc.X <= 1920 && loc.Y > 0 && loc.Y <= 1080)
 			std::cout << "w2s locx " << loc.X << " w2sy " << loc.Y << std::endl;
 
+		DrawString((char*)"object", loc.X, loc.Y,  255, 255, 0, dx_FontCalibri);
+
+
 		//if (WorldToScreen(ActorsPosition, &Pos, LocalPlayer))
 		//	hDrawTextOutlined(ImVec2(Pos.x, Pos.y), std::to_string(ActorID).c_str(), 14, Vector4(1, 1, 1, 1));
 	}
 
 
-
-	system("pause");
 }
 
 int render() {
