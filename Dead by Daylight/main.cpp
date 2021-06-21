@@ -294,23 +294,11 @@ int entityloop() {
 
 	auto playercontroller = Kernel::KeReadVirtualMemory<uintptr_t>(localplayerFinal + PlayerController);
 
-	//std::cout << "playercontroller " << playercontroller << std::endl;
-
-	//auto playercontrollerlocal = Kernel::KeReadVirtualMemory<uintptr_t>(playercontroller);
 
 	std::cout << "playercontrollerlocal " << playercontroller << std::endl;
 
 	auto PlayerCamera = Kernel::KeReadVirtualMemory<uintptr_t>(playercontroller + 0x2D0);
 	std::cout << "PlayerCamera " << PlayerCamera << std::endl;
-
-	//auto PlayerCamera = Kernel::KeReadVirtualMemory<uintptr_t>(playercontroller + PlayerCameraManager);
-
-	//std::cout << "PlayerCamera " << PlayerCamera << std::endl;
-
-	//auto camera_cache = Kernel::KeReadVirtualMemory<FCameraCacheEntry>(PlayerCamera + 0x1A70);
-	//uintptr_t cameracahce = Kernel::KeReadVirtualMemory<uintptr_t>(PlayerCamera + 0x06E0 + 0x10);
-
-	//std::cout << "cameracahce " << cameracahce << std::endl;
 
 	auto CameraCacheEntry = Kernel::KeReadVirtualMemory<FCameraCacheEntry>(PlayerCamera + 0x1A80);
 
