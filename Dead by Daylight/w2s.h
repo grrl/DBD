@@ -170,6 +170,7 @@ FVector WorldToScreen(FMinimalViewInfo Info, FVector WorldLocation) {
 	if (vTransformed.Z < 1.f)
 		vTransformed.Z = 1.f;
 
+	//float FovAngle = Info.FOV;
 	float FovAngle = Info.FOV;
 
 	//std::cout << "Info.Location  " << Info.Location.X << " y" << Info.Location.Y << std::endl;
@@ -182,6 +183,3 @@ FVector WorldToScreen(FMinimalViewInfo Info, FVector WorldLocation) {
 
 	return Screenlocation;
 }
-
-
-//G::UWorld->OwningGameInstance->LocalPlayers[0]->PlayerController->PlayerCameraManager->CameraCache.POV;
