@@ -1,10 +1,21 @@
-#include <iostream>
+#define _CRT_SECURE_NO_WARNINGS
 #include <Windows.h>
+#include <iostream>
+#include <dwmapi.h>
+#include <ctime>
 #include "driver.h"
 #include "macro.h"
 #include "w2s.h"
 #include "fvector.h"
+#include "d3d9.h"
 
+#include <imgui.h>
+#include "imgui_impl_dx9.h"
+#include "imgui_impl_win32.h"
+#include <d3dx9.h>
+#include <d3d9.h>
+#pragma comment(lib, "d3dx9.lib")
+#pragma comment(lib, "d3d9.lib")
 HWND hGameWnd;
 const static int uworld_offset = 0x8CFAF00;
 const static int gnames_offset = 0x8B2B940;
@@ -22,6 +33,38 @@ uintptr_t actorcluster;
 uintptr_t actors;
 uintptr_t gameinstance;
 int actor_count;
+
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+MARGINS pMargin;
+MSG Message;
+HANDLE hnd;
+DWORD id;
+int render();
+
+LRESULT CALLBACK Proc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam)
+{
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, Message, wParam, lParam) && show_menu == true)
+	{
+		return 1l;
+	}
+	switch (Message)
+	{
+	case WM_PAINT: // we need to paint? lets paint!
+		render();
+		break;
+	case WM_CREATE:
+		return DwmExtendFrameIntoClientArea(hWnd, &pMargin); // extension of window frame into client area
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0); // We need to use this to exit a message loop
+		break;
+	default:
+		return DefWindowProc(hWnd, Message, wParam, lParam); // Making sure all messages are processed
+		break;
+	}
+}
+
+
 int main() {
 
 	AllocConsole();
@@ -168,11 +211,11 @@ int main() {
 
 		auto AActors = Kernel::KeReadVirtualMemory<uintptr_t>(actors + (i * 0x8));
 
-		std::cout << "actor " << i << AActors << std::endl;
+		//std::cout << "actor " << i << AActors << std::endl;
 
 		auto AActors_component = Kernel::KeReadVirtualMemory<uintptr_t>(AActors + rootcomponent);
 
-		std::cout << "actorcomponent " << AActors_component << std::endl;
+		//std::cout << "actorcomponent " << AActors_component << std::endl;
 
 		FVector ActorsPosition = Kernel::KeReadVirtualMemory<FVector>(AActors_component + relativelocation);
 
@@ -181,11 +224,12 @@ int main() {
 
 		std::cout << "actorid " << ActorID << std::endl;
 
-		std::cout << "x " << ActorsPosition.X << "y " << ActorsPosition.Y << "z " << ActorsPosition.Z << std::endl;
+		//std::cout << "x " << ActorsPosition.X << "y " << ActorsPosition.Y << "z " << ActorsPosition.Z << std::endl;
 
 		FVector loc = WorldToScreen(CameraCacheEntry.POV, ActorsPosition);
 
-		//std::cout << "w2s locx " << loc.X << " w2sy " << loc.Y << std::endl;
+		if (loc.X > 0 && loc.X <= 1920 && loc.Y > 0 && loc.Y <= 1080)
+			std::cout << "w2s locx " << loc.X << " w2sy " << loc.Y << std::endl;
 
 		//if (WorldToScreen(ActorsPosition, &Pos, LocalPlayer))
 		//	hDrawTextOutlined(ImVec2(Pos.x, Pos.y), std::to_string(ActorID).c_str(), 14, Vector4(1, 1, 1, 1));

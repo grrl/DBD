@@ -48,7 +48,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Program Files %28x86%29\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.16.27023\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;C:\Program Files %28x86%29\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.16.27023\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\user\Documents\Visual Studio 2017\Projects\Dead by Daylight\Dead by Daylight\ImGui;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Program Files %28x86%29\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.16.27023\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\user\Documents\Visual Studio 2017\Projects\Dead by Daylight\Dead by Daylight\ImGui;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;C:\Program Files %28x86%29\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.16.27023\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -127,12 +127,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="d3d9.cpp" />
+    <ClCompile Include="draw.cpp" />
     <ClCompile Include="fvector.cpp" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_dx9.cpp" />
+    <ClCompile Include="imgui_impl_win32.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="d3d9.h" />
+    <ClInclude Include="draw.h" />
     <ClInclude Include="driver.h" />
     <ClInclude Include="fvector.h" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_dx9.h" />
+    <ClInclude Include="imgui_impl_win32.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="macro.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="vector3.h" />
