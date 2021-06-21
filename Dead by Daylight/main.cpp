@@ -43,7 +43,7 @@ MARGINS pMargin;
 MSG Message;
 HANDLE hnd;
 DWORD id;
-int entityloop();
+void entityloop();
 int render();
 
 LRESULT CALLBACK Proc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam)

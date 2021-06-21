@@ -55,7 +55,6 @@ void menu() {
 	{
 		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
 		ImGui::Checkbox("Aimb##aim", &aim);
-		ImGui::SliderFloat("Fov##fovslider", &fov, 1.0f, 180.f, "%1.0f");
 		ImGui::End();
 	}
 }
