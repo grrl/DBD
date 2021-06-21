@@ -152,6 +152,7 @@
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="macro.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="vector3.h" />
     <ClInclude Include="w2s.h" />
