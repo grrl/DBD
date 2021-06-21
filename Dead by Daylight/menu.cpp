@@ -18,6 +18,18 @@ void SendKey() {
 	SendInput(1, &input, sizeof(INPUT));
 }
 
+void SendKeySpace() {
+	INPUT input;
+	WORD vkey = VK_SPACE; // see link below
+	input.type = INPUT_KEYBOARD;
+	input.ki.wScan = MapVirtualKey(vkey, MAPVK_VK_TO_VSC);
+	input.ki.time = 0;
+	input.ki.dwExtraInfo = 0;
+	input.ki.wVk = vkey;
+	input.ki.dwFlags = 0; // there is no KEYEVENTF_KEYDOWN
+	SendInput(1, &input, sizeof(INPUT));
+}
+
 void ChangeClickability(bool canclick, HWND ownd)
 {
 	long style = GetWindowLong(

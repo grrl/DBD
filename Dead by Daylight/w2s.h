@@ -1,7 +1,7 @@
 #pragma once
 #include "fvector.h"
 #include "structs.h"
-
+#include "d3d9.h"
 
 /*
 bool WorldToScreen(D3DXVECTOR3 in, D3DXVECTOR2 * out)
@@ -172,13 +172,10 @@ FVector WorldToScreen(FMinimalViewInfo Info, FVector WorldLocation) {
 
 	float FovAngle = Info.FOV;
 
-	std::cout << "Info.Location  " << Info.Location.X << " y" << Info.Location.Y << std::endl;
+	//std::cout << "Info.Location  " << Info.Location.X << " y" << Info.Location.Y << std::endl;
 
-	//float ScreenCenterX = windowWidth / 2;
-	//float ScreenCenterY = windowHeight / 2;
-
-	float ScreenCenterX = 1920 / 2;
-	float ScreenCenterY = 1080 / 2;
+	float ScreenCenterX = windowWidth / 2;
+	float ScreenCenterY = windowHeight / 2;
 
 	Screenlocation.X = ScreenCenterX + vTransformed.X * (ScreenCenterX / tanf(FovAngle * (float)M_PI / 360.f)) / vTransformed.Z;
 	Screenlocation.Y = ScreenCenterY - vTransformed.Y * (ScreenCenterX / tanf(FovAngle * (float)M_PI / 360.f)) / vTransformed.Z;
