@@ -470,51 +470,65 @@ Please update
 		uint32_t ActorID = Kernel::KeReadVirtualMemory<uint32_t>(CurrentActor + 0x18);
 
 
-		//FVector ActorsPosition = Kernel::KeReadVirtualMemory<FVector>(Kernel::KeReadVirtualMemory<uintptr_t>((AActors + rootcomponent) + relativelocation));
-		//std::cout << "actorid " << ActorID << " x " << ActorsPosition.X << " y " << ActorsPosition.Y << " z " << ActorsPosition.Z << std::endl;
-		//std::cout << "x " << ActorsPosition.X << "y " << ActorsPosition.Y << "z " << ActorsPosition.Z << std::endl;
-
-		//uint64 CurrentActorMesh = Kernel::KeReadVirtualMemory<uint64>(Entity + 0x290);//Kernel::KeReadVirtualMemory<uint64_t>(EntityRootComp + Mesh);
-
-		//FVector pos = GetBoneWithRotation(CurrentActorMesh, 66);
-
-		uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-		FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+		if (ActorID == 4064489) {
 
 
-		std::cout << "pos fov " << CameraCacheEntry.FOV << std::endl;
+			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 
-		//FVector loc = WorldToScreen(CameraCacheEntry.POV, pos);
-		FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-
-
-		std::cout << "PlayerScreenPos " << PlayerScreenPos.X << " " << PlayerScreenPos.Y << std::endl;
+			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
 
 
-		//if (loc.X > 0 && loc.X <= 1920 && loc.Y > 0 && loc.Y <= 1080)
-			//std::cout << "w2s locx " << loc.X << " w2sy " << loc.Y << std::endl;
+			std::cout << "pos fov " << CameraCacheEntry.FOV << std::endl;
 
-		char buffer[20];
-		//double dist2 = dist >= 0. ? floor(dist*100.) / 100. : ceil(dist*100.) / 100.;
-		int ret = snprintf(buffer, sizeof buffer, "%d", ActorID);
-		//printf("%d\n", dist);
-		//char result[6];   // array to hold the result.
+			//FVector loc = WorldToScreen(CameraCacheEntry.POV, pos);
+			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 
-		//strcat(result, buffer); // append string two to the result.
 
-		std::cout << "actorid " << ActorID << std::endl;
+			std::cout << "PlayerScreenPos " << PlayerScreenPos.X << " " << PlayerScreenPos.Y << std::endl;
 
-		if (ActorID == 4064489)
+
+			std::cout << "actorid " << ActorID << std::endl;
+
+			//if (ActorID == 4064489)
 			DrawString((char*)"Generator", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 
-		//DrawString((char*)buffer, PlayerScreenPos.X, PlayerScreenPos.Y,  255, 0, 255, dx_FontCalibri);
+			//DrawString((char*)buffer, PlayerScreenPos.X, PlayerScreenPos.Y,  255, 0, 255, dx_FontCalibri);
 
 
-		//if (WorldToScreen(ActorsPosition, &Pos, LocalPlayer))
-		//	hDrawTextOutlined(ImVec2(Pos.x, Pos.y), std::to_string(ActorID).c_str(), 14, Vector4(1, 1, 1, 1));
+			//if (WorldToScreen(ActorsPosition, &Pos, LocalPlayer))
+			//	hDrawTextOutlined(ImVec2(Pos.x, Pos.y), std::to_string(ActorID).c_str(), 14, Vector4(1, 1, 1, 1));
+		}
+		else {
+
+			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
+
+			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+
+
+			std::cout << "pos fov " << CameraCacheEntry.FOV << std::endl;
+
+			//FVector loc = WorldToScreen(CameraCacheEntry.POV, pos);
+			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+
+
+			std::cout << "PlayerScreenPos " << PlayerScreenPos.X << " " << PlayerScreenPos.Y << std::endl;
+
+
+			//if (loc.X > 0 && loc.X <= 1920 && loc.Y > 0 && loc.Y <= 1080)
+				//std::cout << "w2s locx " << loc.X << " w2sy " << loc.Y << std::endl;
+
+			char buffer[20];
+			//double dist2 = dist >= 0. ? floor(dist*100.) / 100. : ceil(dist*100.) / 100.;
+			int ret = snprintf(buffer, sizeof buffer, "%d", ActorID);
+			//printf("%d\n", dist);
+			//char result[6];   // array to hold the result.
+
+			//strcat(result, buffer); // append string two to the result.
+
+			std::cout << "actorid " << ActorID << std::endl;
+		}
 	}
 	
-
 }
 
 int render() {
