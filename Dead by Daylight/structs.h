@@ -43,3 +43,24 @@ public:
 	char pad_0x0564[0x4];
 	FMinimalViewInfo POV;
 };
+
+struct ObjectName
+{
+	char data[127];
+};
+
+struct sPlayerName
+{
+	char data[64];
+};
+
+struct USkillCheck
+{
+public:
+		unsigned char                                      UnknownData00[0x4];                                       // 0x0290(0x0004) MISSED OFFSET
+		float                                              ProgressRate;                                             // 0x0294(0x0004) (Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData)
+		float                                              SuccessZoneStart;                                         // 0x0298(0x0004) (Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData)
+		float                                              SuccessZoneEnd;                                           // 0x029C(0x0004) (Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData)
+		float                                              BonusZoneLength;                                          // 0x02A0(0x0004) (Edit, BlueprintVisible, ZeroConstructor, IsPlainOldData)
+		int                                                SkillCheckCount;                                          // 0x02A4(0x0004) (ZeroConstructor, Transient, IsPlainOldData
+};

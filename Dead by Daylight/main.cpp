@@ -264,6 +264,54 @@ float Successzone(uintptr_t SkillCheck) {
 	}
 }
 
+/*
+std::string GetGNamesByObjID(int32_t ObjectID)
+{
+	
+	QWORD GName = Kernel::KeReadVirtualMemory<QWORD>(Kernel::GameModule + gnames_offset);
+	int64_t fNamePtr = Kernel::KeReadVirtualMemory<uint64_t>(GName + int(ObjectID / 0x408C) * 0x8);
+	int64_t fName = Kernel::KeReadVirtualMemory<uint64_t>(fNamePtr + int(ObjectID % 0x408C) * 0x8);
+	ObjectName pBuffer = Kernel::KeReadVirtualMemory<ObjectName>(fName + 0x10);
+	return std::string(pBuffer.data);
+	
+	uint64_t chunkOffset = ObjectID >> 16; // Block - Sidenote: The casting may not be necessary, arithmetic/logical shifting nonsense.
+	uint64_t nameOffset = (uint16)ObjectID;
+
+	// The first chunk/shard starts at 0x10, so even if chunkOffset is zero, we will start there.
+
+	uint64_t namePoolChunk = Kernel::KeReadVirtualMemory<uint64_t>(fNamePool + ((chunkOffset + 2) * 8));
+	uint64_t entryOffset = namePoolChunk + (uint64_t)(2 * nameOffset);
+	uint16 nameEntry = Kernel::KeReadVirtualMemory<uint16>(entryOffset);
+
+	// If this is negative (and the namePoolChunk & entryOffset's are valid then read the string as Unicode
+	// I haven't come across this use case yet.
+	// e.g. Read<UnicodeString>(entryOffset + 2, -nameLength * 2)
+
+	ObjectName pBuffer = Kernel::KeReadVirtualMemory<ObjectName>(entryOffset + 2);
+	return std::string(pBuffer.data);
+
+}
+*/
+std::string GetFullNamesByObjID(int32_t objid)
+{
+	int TableLocation = (unsigned int)(objid >> 0x10);
+	uint16_t RowLocation = (unsigned __int16)objid;
+	uint64_t GNameTable = Kernel::GameModule + gnames_offset;
+
+	uint64_t TableLocationAddress = Kernel::KeReadVirtualMemory<uint64_t>(GNameTable + 0x10 + TableLocation * 0x8) + (unsigned __int32)(4 * RowLocation);
+
+	uint64_t sLength = (unsigned __int64)(Kernel::KeReadVirtualMemory<uint16_t>(TableLocationAddress + 4)) >> 1;
+	ObjectName pBuffer;
+	if (sLength < 128)
+	{
+		pBuffer = Kernel::KeReadVirtualMemory<ObjectName>(TableLocationAddress + 6);
+
+		//ReadMem((TableLocationAddress + 6), (ULONGLONG)pNameBuffer, sLength);
+	}
+	return std::string(pBuffer.data);;
+}
+
+
 void entityloop() {
 
 
@@ -326,13 +374,60 @@ void entityloop() {
 
 	auto playercontroller = Kernel::KeReadVirtualMemory<uintptr_t>(localplayerFinal + PlayerController);
 
+	//uint64_t apawn = Kernel::KeReadVirtualMemory<uint64_t>(actors + 0x250);
 
-	//std::cout << "playercontrollerlocal " << playercontroller << std::endl;
+	//std::cout << "apawn " << apawn << std::endl;
 
 	auto PlayerCamera = Kernel::KeReadVirtualMemory<uintptr_t>(playercontroller + 0x2D0);
 	//std::cout << "PlayerCamera " << PlayerCamera << std::endl;
 
 	auto CameraCacheEntry = Kernel::KeReadVirtualMemory<FMinimalViewInfo>(PlayerCamera + 0x1A80);
+
+	/*
+	uint64_t playerinteractionhandler = Kernel::KeReadVirtualMemory<uint64_t>(apawn + 0x950);
+
+	std::cout << "playerinteractionhandler " << playerinteractionhandler << std::endl;
+
+	auto skillcheck = Kernel::KeReadVirtualMemory<USkillCheck>(playerinteractionhandler + 0x2D8);
+
+	std::cout << "skillcheck " << PlayerCamera << std::endl;
+
+
+	bool isdisplayed = skillcheck.
+
+	if (isdisplayed == true)
+		std::cout << "skillcheck is displayed" << std::endl;
+	*/
+	/*
+	uint64_t APawn = mem->Read<uint64_t>(PlayerController + 0x02B8);
+uint64_t UPlayerInteractionHandler = mem->Read<uint64_t>(APawn + 0x0960);
+ 
+uint64_t USkillCheck = mem->Read<uint64_t>(UPlayerInteractionHandler + 0x0230);
+ 
+bool HasSkillCheck = mem->Read<bool>(USkillCheck + 0x027C);
+ 
+auto Progress = mem->Read<float>(USkillCheck + 0x22C);
+auto SuccessZoneStart = mem->Read<float>(USkillCheck + 0x264);
+
+	*/
+
+	/*
+	Uworld>game_instance>localplayer>player_controller>APawn>UPlayerInteractionHandler
+ 
+uint64_t USkillCheck = read<uint64_t>(UPlayerInteractionHandler + 0x0280);
+int CurrentProgress = read<uint64_t>(USkillCheck + 0x022C);
+int BonusProgress = read<uint64_t>(USkillCheck + 0x0264);
+if (CurrentProgress > BonusProgress)
+			{
+	INPUT Input = { 0 };
+				Input.type = INPUT_KEYBOARD;
+				Input.ki.wVk = VK_SPACE;
+				SendInput(1, &Input, sizeof(Input));
+				Input.ki.dwFlags = KEYEVENTF_KEYUP;
+				SendInput(1, &Input, sizeof(Input));
+}
+
+	*/
 
 	//std::cout << "cameracachenentry " << CameraCacheEntry.TimeStamp << std::endl;
 	//std::cout << "cameracachenentryfov " << CameraCacheEntry.POV.FOV << std::endl;
@@ -469,8 +564,11 @@ Please update
 
 		uint32_t ActorID = Kernel::KeReadVirtualMemory<uint32_t>(CurrentActor + 0x18);
 
+		std::string ObjectName = GetFullNamesByObjID(ActorID);
 
-		if (ActorID == 4064489) {
+		std::cout << "string is " << ObjectName.c_str() << std::endl;
+
+		if (ObjectName == 4064489) {
 
 
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
@@ -498,7 +596,7 @@ Please update
 			//if (WorldToScreen(ActorsPosition, &Pos, LocalPlayer))
 			//	hDrawTextOutlined(ImVec2(Pos.x, Pos.y), std::to_string(ActorID).c_str(), 14, Vector4(1, 1, 1, 1));
 		}
-		/*
+		
 		else {
 
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
@@ -525,10 +623,10 @@ Please update
 
 			std::cout << "actorid " << ActorID << std::endl;
 
-			DrawString((char*)buffer, PlayerScreenPos.X, PlayerScreenPos.Y,  255, 0, 255, dx_FontCalibri);
+			DrawString((char*)ObjectName.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y,  255, 0, 255, dx_FontCalibri);
 
 		}
-		*/
+		
 
 	}
 	
