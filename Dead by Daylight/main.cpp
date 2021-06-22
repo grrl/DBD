@@ -494,7 +494,20 @@ Please update
 		//if (loc.X > 0 && loc.X <= 1920 && loc.Y > 0 && loc.Y <= 1080)
 			//std::cout << "w2s locx " << loc.X << " w2sy " << loc.Y << std::endl;
 
-		DrawString((char*)"object", PlayerScreenPos.X, PlayerScreenPos.Y,  255, 0, 255, dx_FontCalibri);
+		char buffer[20];
+		//double dist2 = dist >= 0. ? floor(dist*100.) / 100. : ceil(dist*100.) / 100.;
+		int ret = snprintf(buffer, sizeof buffer, "%d", ActorID);
+		//printf("%d\n", dist);
+		//char result[6];   // array to hold the result.
+
+		//strcat(result, buffer); // append string two to the result.
+
+		std::cout << "actorid " << ActorID << std::endl;
+
+		if (ActorID == 4064489)
+			DrawString((char*)"Generator", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
+
+		//DrawString((char*)buffer, PlayerScreenPos.X, PlayerScreenPos.Y,  255, 0, 255, dx_FontCalibri);
 
 
 		//if (WorldToScreen(ActorsPosition, &Pos, LocalPlayer))
