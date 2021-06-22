@@ -484,7 +484,7 @@ Please update
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 
 
-			std::cout << "PlayerScreenPos " << PlayerScreenPos.X << " " << PlayerScreenPos.Y << std::endl;
+			//std::cout << "PlayerScreenPos " << PlayerScreenPos.X << " " << PlayerScreenPos.Y << std::endl;
 
 
 			std::cout << "actorid " << ActorID << std::endl;
@@ -511,9 +511,6 @@ Please update
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 
 
-			std::cout << "PlayerScreenPos " << PlayerScreenPos.X << " " << PlayerScreenPos.Y << std::endl;
-
-
 			//if (loc.X > 0 && loc.X <= 1920 && loc.Y > 0 && loc.Y <= 1080)
 				//std::cout << "w2s locx " << loc.X << " w2sy " << loc.Y << std::endl;
 
@@ -526,6 +523,9 @@ Please update
 			//strcat(result, buffer); // append string two to the result.
 
 			std::cout << "actorid " << ActorID << std::endl;
+
+			DrawString((char*)buffer, PlayerScreenPos.X, PlayerScreenPos.Y,  255, 0, 255, dx_FontCalibri);
+
 		}
 	}
 	
