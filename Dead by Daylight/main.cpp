@@ -498,6 +498,7 @@ Please update
 			//if (WorldToScreen(ActorsPosition, &Pos, LocalPlayer))
 			//	hDrawTextOutlined(ImVec2(Pos.x, Pos.y), std::to_string(ActorID).c_str(), 14, Vector4(1, 1, 1, 1));
 		}
+		/*
 		else {
 
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
@@ -527,6 +528,8 @@ Please update
 			DrawString((char*)buffer, PlayerScreenPos.X, PlayerScreenPos.Y,  255, 0, 255, dx_FontCalibri);
 
 		}
+		*/
+
 	}
 	
 }
