@@ -326,7 +326,7 @@ uint32_t BP_CamperFemale03_Character_C;
 uint32_t BP_CamperMale13_Character_C;
 uint32_t BP_Slasher_Character_23_C;
 
-std::string searchlist[55] = { 
+std::string searchlist[56] = { 
 	"GeneratorHospital",
 	"GeneratorStandard_C",
 	"GeneratorLunarIndoors_C",
@@ -387,7 +387,6 @@ std::string searchlist[55] = {
 
 	"BP_Hatch01"
 	"BP_Hatch01_C"
-	//"SearchableSpawner-BP_TL_Fr_16x16_HD03_C"
 };
 
 std::map<uint32_t, std::string> hitlist;
@@ -503,7 +502,7 @@ void entityloop() {
 			std::string objectname = GetFullNamesByObjID(actorid);
 
 			//HERE HATCH
-			/*
+			
 			std::cout << "string is " << objectname.c_str() << std::endl;
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 			if (EntityRootComp == NULL)
@@ -513,9 +512,9 @@ void entityloop() {
 				continue;
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-			*/
+			
 
-			for (int i = 0; i < 55; i++) {
+			for (int i = 0; i < 56; i++) {
 				if (searchlist[i] == objectname) {
 					std::cout << searchlist[i].c_str() << " equals " << objectname.c_str() << std::endl;
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
