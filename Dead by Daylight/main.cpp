@@ -326,7 +326,7 @@ uint32_t BP_CamperFemale03_Character_C;
 uint32_t BP_CamperMale13_Character_C;
 uint32_t BP_Slasher_Character_23_C;
 
-std::string searchlist[52] = { 
+std::string searchlist[53] = { 
 	"GeneratorHospital",
 	"GeneratorStandard_C",
 	"GeneratorLunarIndoors_C",
@@ -382,8 +382,8 @@ std::string searchlist[52] = {
 	"BP_Slasher_Character_20_C",
 	"BP_Slasher_Character_21_C",
 	"BP_Slasher_Character_22_C",
-	"BP_Slasher_Character_23_C"
-
+	"BP_Slasher_Character_23_C",
+	"BP_Slasher_Character_24_C"
 	//"SearchableSpawner-BP_TL_Fr_16x16_HD03_C"
 };
 
@@ -499,7 +499,7 @@ void entityloop() {
 
 			std::string objectname = GetFullNamesByObjID(actorid);
 			//std::cout << "string is " << objectname.c_str() << std::endl;
-			for (int i = 0; i < 52; i++) {
+			for (int i = 0; i < 53; i++) {
 				if (searchlist[i] == objectname) {
 					std::cout << searchlist[i].c_str() << " equals " << objectname.c_str() << std::endl;
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
