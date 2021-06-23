@@ -326,7 +326,7 @@ uint32_t BP_CamperFemale03_Character_C;
 uint32_t BP_CamperMale13_Character_C;
 uint32_t BP_Slasher_Character_23_C;
 
-std::string searchlist[60] = { 
+std::string searchlist[61] = { 
 	"GeneratorHospital",
 	"GeneratorStandard_C",
 	"GeneratorLunarIndoors_C",
@@ -380,11 +380,11 @@ std::string searchlist[60] = {
 	"BP_Slasher_Character_18_C",
 	"BP_Slasher_Character_19_C",
 	"BP_Slasher_Character_20_C",
+	"Bp_Slasher_Character_20_C",
 	"BP_Slasher_Character_21_C",
 	"BP_Slasher_Character_22_C",
 	"BP_Slasher_Character_23_C",
 	"BP_Slasher_Character_24_C",
-
 	"BP_Hatch01",
 	"BP_Hatch01_C",
 
@@ -501,6 +501,8 @@ void entityloop() {
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
 			else if (search.find("Searchable") != std::string::npos || search.find("Chest") != std::string::npos)
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
+			else if (search.find("BP_Hatch") != std::string::npos)
+				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
 			else
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 		}
@@ -521,7 +523,7 @@ void entityloop() {
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 			*/
 
-			for (int i = 0; i < 60; i++) {
+			for (int i = 0; i < 61; i++) {
 
 				if (searchlist[i] == objectname) {
 					//std::cout << searchlist[i].c_str() << " equals " << objectname.c_str() << std::endl;
