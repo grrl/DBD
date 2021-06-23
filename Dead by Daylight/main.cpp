@@ -383,6 +383,8 @@ std::string searchlist[52] = {
 	"BP_Slasher_Character_21_C",
 	"BP_Slasher_Character_22_C",
 	"BP_Slasher_Character_23_C"
+
+	//"SearchableSpawner-BP_TL_Fr_16x16_HD03_C"
 };
 
 std::map<uint32_t, std::string> hitlist;
