@@ -326,11 +326,64 @@ uint32_t BP_CamperFemale03_Character_C;
 uint32_t BP_CamperMale13_Character_C;
 uint32_t BP_Slasher_Character_23_C;
 
-std::string searchlist[30] = { "BP_CamperFemale01_Character_C", "BP_CamperFemale02_Character_C",
-"BP_CamperMale01_C", "BP_CamperMale02_Character_C", "BP_Slasher_Character_01_C",
-"BP_CamperFemale03_Character_C", "BP_CamperMale13_Character_C", "BP_Slasher_Character_23_C",
-"GeneratorHospital", "GeneratorStandard_C", "GeneratorLunarIndoors_C", "GeneratorSuburbs_C" 
-, "BP_Slasher_Character_02_C"};
+std::string searchlist[52] = { 
+	"GeneratorHospital",
+	"GeneratorStandard_C",
+	"GeneratorLunarIndoors_C",
+	"GeneratorSuburbs_C"
+
+	"BP_CamperFemale01_C",
+	"BP_CamperFemale01_Character_C", 
+	"BP_CamperFemale02_Character_C",
+	"BP_CamperFemale03_Character_C",
+	"BP_CamperFemale04_Character_C",
+	"BP_CamperFemale05_Character_C",
+	"BP_CamperFemale06_Character_C",
+	"BP_CamperFemale07_Character_C",
+	"BP_CamperFemale08_Character_C",
+	"BP_CamperFemale09_Character_C",
+	"BP_CamperFemale10_Character_C",
+	"BP_CamperFemale11_Character_C",
+	"BP_CamperFemale12_Character_C",
+	"BP_CamperFemale13_Character_C",
+
+	"BP_CamperMale01_C", 
+	"BP_CamperMale02_Character_C", 
+	"BP_CamperMale04_Character_C"
+	"BP_CamperMale05_Character_C",
+	"BP_CamperMale06_Character_C",
+	"BP_CamperMale07_Character_C",
+	"BP_CamperMale08_Character_C",
+	"BP_CamperMale09_Character_C",
+	"BP_CamperMale10_Character_C",
+	"BP_CamperMale11_Character_C",
+	"BP_CamperMale12_Character_C",
+	"BP_CamperMale13_Character_C",
+
+	"BP_Slasher_Character_01_C",
+	"BP_Slasher_Character_02_C",
+	"BP_Slasher_Character_03_C",
+	"BP_Slasher_Character_04_C",
+	"BP_Slasher_Character_05_C",
+	"BP_Slasher_Character_06_C",
+	"BP_Slasher_Character_07_C",
+	"BP_Slasher_Character_08_C",
+	"BP_Slasher_Character_09_C",
+	"BP_Slasher_Character_10_C",
+	"BP_Slasher_Character_11_C",
+	"BP_Slasher_Character_12_C",
+	"BP_Slasher_Character_13_C",
+	"BP_Slasher_Character_14_C",
+	"BP_Slasher_Character_15_C",
+	"BP_Slasher_Character_16_C",
+	"BP_Slasher_Character_17_C",
+	"BP_Slasher_Character_18_C",
+	"BP_Slasher_Character_19_C",
+	"BP_Slasher_Character_20_C",
+	"BP_Slasher_Character_21_C",
+	"BP_Slasher_Character_22_C",
+	"BP_Slasher_Character_23_C"
+};
 
 std::map<uint32_t, std::string> hitlist;
 
@@ -363,8 +416,9 @@ void entityloop() {
 		return;
 
 	}
-	else if (actor_count < 101) {
+	else if (actor_count < 80) {
 		hitlist.clear();
+		return;
 	}
 
 	actor_count_backup = actor_count;
@@ -405,7 +459,7 @@ void entityloop() {
 		uint64_t CurrentActor = Kernel::KeReadVirtualMemory<uint64_t>(actors + (static_cast<uint64_t>(i) * 0x8));
 		//uint64_t CurrentActor = read<uint64_t>(Managers::EntityList + ActorNum * 0x8);
 		if (CurrentActor == (uint64_t)nullptr || CurrentActor == -1 || CurrentActor == NULL)
-			return;
+			continue;
 
 		//std::cout << "actor " << i << AActors << std::endl;
 		//uint64 AActors_component = Kernel::KeReadVirtualMemory<uint64>(Entity + rootcomponent);
@@ -420,45 +474,39 @@ void entityloop() {
 
 			std::string search = hitlist.find(actorid)->second;
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			std::cout << "hislist " << search.c_str() << std::endl;
 
-			if (search == "BP_Slasher_Character_01_C")
+			if (EntityRootComp == NULL)
+				continue;
+			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+
+			if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
+				continue;
+
+			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+
+			//std::cout << "hitlist " << search.c_str() << std::endl;
+			
+			if (search.find("BP_Slasher") != std::string::npos)
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search.find("BP_Camper") != std::string::npos)
+				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
 			else
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 		}
 		else {
 
 			std::string objectname = GetFullNamesByObjID(actorid);
-
-			bool found = false;
 			//std::cout << "string is " << objectname.c_str() << std::endl;
-			for (int i = 0; i < searchlist->size(); i++) {
+			for (int i = 0; i < 52; i++) {
 				if (searchlist[i] == objectname) {
-					found = true;
+					std::cout << searchlist[i].c_str() << " equals " << objectname.c_str() << std::endl;
+					if (hitlist.count(actorid) == 0) //if not add to searchlist
+						hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
 					break;
 				}
 			}
 
 
-			if (found) {
-				//if string is in searchlist
-
-				//std::cout << "is " << objectname.c_str() << std::endl;
-
-				if (hitlist.count(actorid) == 0) //if not add to searchlist
-					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
-
-				//draw
-				/*
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-				*/
-			}
 		}
 		/*
 
