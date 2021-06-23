@@ -34,6 +34,7 @@ uintptr_t actorcluster;
 uintptr_t actors;
 uintptr_t gameinstance;
 int actor_count;
+int actor_count_backup;
 
 char lWindowName[256] = "Overlay";
 char tWindowName[256] = "DeadByDaylight  "; // put Game window name here
@@ -311,6 +312,7 @@ std::string GetFullNamesByObjID(int32_t objid)
 	return std::string(pBuffer.data);;
 }
 
+uint32_t ActorID_generator;
 
 void entityloop() {
 
@@ -334,8 +336,19 @@ void entityloop() {
 
 	actor_count = Kernel::KeReadVirtualMemory<int>(persistentlevel + actor_count_offset);
 
-	if (actor_count == NULL)
+	std::cout << "actor_count " << actor_count << std::endl;
+
+	if (actor_count == NULL) {
+
+		ActorID_generator = NULL;
+
 		return;
+	}
+	else if (actor_count != actor_count_backup && actor_count_backup < 102) {
+
+		ActorID_generator = NULL;
+	}
+	actor_count_backup = actor_count;
 
 	//std::cout << "actorcount: " << actor_count << std::endl;
 
@@ -383,64 +396,79 @@ void entityloop() {
 
 		uint32_t ActorID = Kernel::KeReadVirtualMemory<uint32_t>(CurrentActor + 0x18);
 
-		std::string ObjectName = GetFullNamesByObjID(ActorID);
-
-		std::cout << "string is " << ObjectName.c_str() << std::endl;
-
-
-		if (ObjectName == "GeneratorHospital" || ObjectName == "GeneratorStandard_C") {
+		if (ActorID_generator != NULL && ActorID == ActorID_generator) {
 
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 			DrawString((char*)"Generator", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
+
+
 		}
-		else if (ObjectName == "BP_CamperFemale01_Character") {
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"Female", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
+		else if (ActorID_generator == NULL) {
+
+
+			std::string ObjectName = GetFullNamesByObjID(ActorID);
+
+			//std::cout << "string is " << ObjectName.c_str() << std::endl;
+
+			if (ObjectName == "GeneratorHospital" || ObjectName == "GeneratorStandard_C") {
+
+				if (ActorID_generator == NULL || ActorID_generator != ActorID)
+					ActorID_generator = ActorID;
+
+
+				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
+				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+				DrawString((char*)"Generator", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
+			}
+			else if (ObjectName == "BP_CamperFemale01_Character") {
+				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
+				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+				DrawString((char*)"Female", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
+			}
+			else if (ObjectName == "Chest 2-Basement-BP_TL_St_32x32_Foundry01_C" || ObjectName == "SearchableSpawner-BP_TL_Fr_16x16_HD03_C") {
+				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
+				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+				DrawString((char*)"Female", PlayerScreenPos.X, PlayerScreenPos.Y, 240, 240, 214, dx_FontCalibri);
+			}
+			else
+			{
+
+				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
+
+				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+
+
+				//std::cout << "pos fov " << CameraCacheEntry.FOV << std::endl;
+
+				//FVector loc = WorldToScreen(CameraCacheEntry.POV, pos);
+				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+
+
+				//if (loc.X > 0 && loc.X <= 1920 && loc.Y > 0 && loc.Y <= 1080)
+					//std::cout << "w2s locx " << loc.X << " w2sy " << loc.Y << std::endl;
+
+				char buffer[20];
+				//double dist2 = dist >= 0. ? floor(dist*100.) / 100. : ceil(dist*100.) / 100.;
+				int ret = snprintf(buffer, sizeof buffer, "%d", ActorID);
+				//printf("%d\n", dist);
+				//char result[6];   // array to hold the result.
+
+				//strcat(result, buffer); // append string two to the result.
+
+				//std::cout << "actorid " << ActorID << std::endl;
+
+				DrawString((char*)ObjectName.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
+			}
+
 		}
-		else if (ObjectName == "Chest 2-Basement-BP_TL_St_32x32_Foundry01_C" || ObjectName == "SearchableSpawner-BP_TL_Fr_16x16_HD03_C") {
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"Female", PlayerScreenPos.X, PlayerScreenPos.Y, 240, 240, 214, dx_FontCalibri);
-		}
-		else
-		{
 
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-
-
-			std::cout << "pos fov " << CameraCacheEntry.FOV << std::endl;
-
-			//FVector loc = WorldToScreen(CameraCacheEntry.POV, pos);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-
-
-			//if (loc.X > 0 && loc.X <= 1920 && loc.Y > 0 && loc.Y <= 1080)
-				//std::cout << "w2s locx " << loc.X << " w2sy " << loc.Y << std::endl;
-
-			char buffer[20];
-			//double dist2 = dist >= 0. ? floor(dist*100.) / 100. : ceil(dist*100.) / 100.;
-			int ret = snprintf(buffer, sizeof buffer, "%d", ActorID);
-			//printf("%d\n", dist);
-			//char result[6];   // array to hold the result.
-
-			//strcat(result, buffer); // append string two to the result.
-
-			std::cout << "actorid " << ActorID << std::endl;
-
-			DrawString((char*)ObjectName.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-		}
-
+	
 	}
-
-
-
 }
 
 int render() {
