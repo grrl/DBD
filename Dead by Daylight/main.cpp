@@ -267,13 +267,13 @@ float Successzone(uintptr_t SkillCheck) {
 /*
 std::string GetGNamesByObjID(int32_t ObjectID)
 {
-	
+
 	QWORD GName = Kernel::KeReadVirtualMemory<QWORD>(Kernel::GameModule + gnames_offset);
 	int64_t fNamePtr = Kernel::KeReadVirtualMemory<uint64_t>(GName + int(ObjectID / 0x408C) * 0x8);
 	int64_t fName = Kernel::KeReadVirtualMemory<uint64_t>(fNamePtr + int(ObjectID % 0x408C) * 0x8);
 	ObjectName pBuffer = Kernel::KeReadVirtualMemory<ObjectName>(fName + 0x10);
 	return std::string(pBuffer.data);
-	
+
 	uint64_t chunkOffset = ObjectID >> 16; // Block - Sidenote: The casting may not be necessary, arithmetic/logical shifting nonsense.
 	uint64_t nameOffset = (uint16)ObjectID;
 
@@ -314,33 +314,16 @@ std::string GetFullNamesByObjID(int32_t objid)
 
 void entityloop() {
 
-
 	uworld = Kernel::KeReadVirtualMemory<QWORD>(Kernel::GameModule + uworld_offset);
-
-	//std::cout << "uworld " << uworld << std::endl;
 
 	if (uworld == NULL)
 		return;
-
-	/*uintptr_t Actors = 
-	D.RPM<uintptr_t>(
-	D.RPM<uintptr_t>(
-	D.RPM<uintptr_t>(
-	D.RPM<uintptr_t>(BaseAddress + Offsets::Uworld) + Offsets::PersistentLevel) + Offsets::ActorCluster) + Offsets::Actors);
-	*/
 
 	persistentlevel = Kernel::KeReadVirtualMemory<uintptr_t>(uworld + persistentlevel_offset);
 
 	if (persistentlevel == NULL)
 		return;
 
-	//std::cout << "persistentlevel: " << persistentlevel << std::endl;
-
-	actorcluster = Kernel::KeReadVirtualMemory<uintptr_t>(persistentlevel + actor_cluster_offset);
-
-	//std::cout << "actorcluster: " << actorcluster << std::endl;
-
-	//actors = Kernel::KeReadVirtualMemory<uintptr_t>(actorcluster + actors_offset);
 
 	actors = Kernel::KeReadVirtualMemory<uintptr_t>(persistentlevel + actors_offset);
 
@@ -374,7 +357,7 @@ void entityloop() {
 
 	auto playercontroller = Kernel::KeReadVirtualMemory<uintptr_t>(localplayerFinal + PlayerController);
 
-	//uint64_t apawn = Kernel::KeReadVirtualMemory<uint64_t>(actors + 0x250);
+	//uint64_t apawn = Kernel::KeReadVirtualMemory<uint64_t>(playercontroller + 0x268);
 
 	//std::cout << "apawn " << apawn << std::endl;
 
@@ -383,171 +366,7 @@ void entityloop() {
 
 	auto CameraCacheEntry = Kernel::KeReadVirtualMemory<FMinimalViewInfo>(PlayerCamera + 0x1A80);
 
-	/*
-	uint64_t playerinteractionhandler = Kernel::KeReadVirtualMemory<uint64_t>(apawn + 0x950);
 
-	std::cout << "playerinteractionhandler " << playerinteractionhandler << std::endl;
-
-	auto skillcheck = Kernel::KeReadVirtualMemory<USkillCheck>(playerinteractionhandler + 0x2D8);
-
-	std::cout << "skillcheck " << PlayerCamera << std::endl;
-
-
-	bool isdisplayed = skillcheck.
-
-	if (isdisplayed == true)
-		std::cout << "skillcheck is displayed" << std::endl;
-	*/
-	/*
-	uint64_t APawn = mem->Read<uint64_t>(PlayerController + 0x02B8);
-uint64_t UPlayerInteractionHandler = mem->Read<uint64_t>(APawn + 0x0960);
- 
-uint64_t USkillCheck = mem->Read<uint64_t>(UPlayerInteractionHandler + 0x0230);
- 
-bool HasSkillCheck = mem->Read<bool>(USkillCheck + 0x027C);
- 
-auto Progress = mem->Read<float>(USkillCheck + 0x22C);
-auto SuccessZoneStart = mem->Read<float>(USkillCheck + 0x264);
-
-	*/
-
-	/*
-	Uworld>game_instance>localplayer>player_controller>APawn>UPlayerInteractionHandler
- 
-uint64_t USkillCheck = read<uint64_t>(UPlayerInteractionHandler + 0x0280);
-int CurrentProgress = read<uint64_t>(USkillCheck + 0x022C);
-int BonusProgress = read<uint64_t>(USkillCheck + 0x0264);
-if (CurrentProgress > BonusProgress)
-			{
-	INPUT Input = { 0 };
-				Input.type = INPUT_KEYBOARD;
-				Input.ki.wVk = VK_SPACE;
-				SendInput(1, &Input, sizeof(Input));
-				Input.ki.dwFlags = KEYEVENTF_KEYUP;
-				SendInput(1, &Input, sizeof(Input));
-}
-
-	*/
-
-	//std::cout << "cameracachenentry " << CameraCacheEntry.TimeStamp << std::endl;
-	//std::cout << "cameracachenentryfov " << CameraCacheEntry.POV.FOV << std::endl;
-	/*
-	auto pawn = Kernel::KeReadVirtualMemory<uintptr_t>(playercontroller + 0x2B8);
-
-	auto interactionhandler = Kernel::KeReadVirtualMemory<uintptr_t>(actors + 0x0890);
-
-	std::cout << "interactionhandler" << interactionhandler << std::endl;
-
-	auto SkillCheck = Kernel::KeReadVirtualMemory<uintptr_t>(interactionhandler + 0x02D8);
-
-	std::cout << "SkillCheck" << SkillCheck << std::endl;
-
-	bool isdisplayed = Kernel::KeReadVirtualMemory<bool>(SkillCheck + 0x130);
-
-	std::cout << "isdisplayed" << isdisplayed << std::endl;
-
-	if (isdisplayed == false)
-		return;
-
-
-	float progress = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x134);
-
-	std::cout << "progress" << progress << std::endl;
-
-	float TARGET = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x184);
-	float successzonestart = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x134 + 0x4);
-	float successzoneend = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x134 + 0x4 + 0x4);
-	float bonuszonelength = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x134 + 0x4 + 0x4 + 0x4);
-	float currentprogress = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x134 + 0x4 + 0x4 + 0x4 + 0x4);
-
-	
-		PlayerController->Pawn + 0x0828 = interactionHandler -> ptr
-		interactionHandler + 0x0140 = skillCheck -> ptr
-		skillCheck + 0x01D0 = bDisplayed -> bool
-		 
-		skillCheck + 0x01B4 = ProgressRate -> float
-		skillCheck + 0x01B8 = SuccessZoneStart -> float
-		skillCheck + 0x01BC = SuccessZoneEnd  ->float 
-		skillCheck + 0x01C0 = BonusZoneLength -> float
-		skillCheck + 0x01D4 = currentProgress -> float
-		 
-		if(bDisplayed && (currentProgress > SuccessZoneStart && currentProgress < SuccessZoneEnd))
-		{
-			executeSkillCheck();
-		}
-	*/
-
-	//if (isdisplayed && (currentprogress > successzonestart && currentprogress < successzoneend))
-	//{
-	//	SendKeySpace();
-	//}
-	/*
-	if(bDisplayed && (currentProgress > SuccessZoneStart && currentProgress < SuccessZoneEnd))
-{
-	executeSkillCheck();
-}
-
-	*/
-	//matrix Matrix 7F310A0
-
-	//latest
-	/*	
-		DWORD64 InteractionHandler = *(DWORD64*)(Pawn + 0x0950);
-DWORD64 SkillCheck = *(DWORD64*)(InteractionHandler + 0x0280);
-
-	SkillCheck:
-#define ISDISPLAY 0x130
-#define PROGRESS 0x134
-#define TARGET 0x184
-
-bool IsDisplayed = *(bool*)(SkillCheck + 0x027C);
-float CurrentProgress = *(float*)(SkillCheck + 0x022C);
-float BonusProgress = *(float*)(SkillCheck + 0x0264);
-
-	*/
-
-
-	/*
-	std::uint64_t playerstate = read<std::uint64_t>(apawn + 0x250);
-	FPlayerStateData playerstateData = read<FPlayerStateData>(playerstate + 0x3D0);
-	*/
-
-	//PlayerList : UWORLD -> 0x140 -> 0x710 -> 0x148 -> i * 0x10 // (not 0x8)
-    //PlayerCount: UWORLD -> 0x140 -> 0x710 -> 0x150
-
-	/*
-	var isDisplayed = Memory.ZwReadBool(processHandle, (IntPtr)USkillCheck.ToInt64() +0x0270);
-                if (isDisplayed)
-                {
-                    var currentProgress = Memory.ZwReadFloat(processHandle,
-                        (IntPtr)USkillCheck.ToInt64() + 0x022C);<-- wrong
-                    var startSuccessZone = Memory.ZwReadFloat(processHandle,
-                        (IntPtr)USkillCheck.ToInt64() + 0x0264);<--- wrong
-
-	*/
-
-	/*
-	DWORD64 InteractionHandler = *(DWORD64*)(Pawn + 0x0950);
-DWORD64 SkillCheck = *(DWORD64*)(InteractionHandler + 0x0280);
-
-bool IsDisplayed = *(bool*)(SkillCheck + 0x027C);
-float CurrentProgress = *(float*)(SkillCheck + 0x022C);
-float BonusProgress = *(float*)(SkillCheck + 0x0264);
-
-
-Please update
-
-	*/
-
-	/*
-	Managers::DBD::IsDisplayed = read<bool>(USkillCheck + 0x0288);
-		Managers::DBD::currentProgress = read<float>(USkillCheck + 0x028C);
-		Managers::DBD::startSuccessZone = read<float>(USkillCheck + 0x02D0);
-
-	*/
-
-
-	
 	for (int i = 0; i < actor_count; i++)
 	{
 
@@ -568,36 +387,28 @@ Please update
 
 		std::cout << "string is " << ObjectName.c_str() << std::endl;
 
-		if (ObjectName == "GeneratorHospital") {
 
+		if (ObjectName == "GeneratorHospital" || ObjectName == "GeneratorStandard_C") {
 
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-
 			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-
-
-			std::cout << "pos fov " << CameraCacheEntry.FOV << std::endl;
-
-			//FVector loc = WorldToScreen(CameraCacheEntry.POV, pos);
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-
-
-			//std::cout << "PlayerScreenPos " << PlayerScreenPos.X << " " << PlayerScreenPos.Y << std::endl;
-
-
-			std::cout << "actorid " << ActorID << std::endl;
-
-			//if (ActorID == 4064489)
 			DrawString((char*)"Generator", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-
-			//DrawString((char*)buffer, PlayerScreenPos.X, PlayerScreenPos.Y,  255, 0, 255, dx_FontCalibri);
-
-
-			//if (WorldToScreen(ActorsPosition, &Pos, LocalPlayer))
-			//	hDrawTextOutlined(ImVec2(Pos.x, Pos.y), std::to_string(ActorID).c_str(), 14, Vector4(1, 1, 1, 1));
 		}
-		/*
-		else {
+		else if (ObjectName == "BP_CamperFemale01_Character") {
+			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
+			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+			DrawString((char*)"Female", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
+		}
+		else if (ObjectName == "Chest 2-Basement-BP_TL_St_32x32_Foundry01_C" || ObjectName == "SearchableSpawner-BP_TL_Fr_16x16_HD03_C") {
+			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
+			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+			DrawString((char*)"Female", PlayerScreenPos.X, PlayerScreenPos.Y, 240, 240, 214, dx_FontCalibri);
+		}
+		else
+		{
 
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 
@@ -623,15 +434,13 @@ Please update
 
 			std::cout << "actorid " << ActorID << std::endl;
 
-			DrawString((char*)ObjectName.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y,  255, 0, 255, dx_FontCalibri);
-
+			DrawString((char*)ObjectName.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 		}
-		*/
-
-
 
 	}
-	
+
+
+
 }
 
 int render() {
@@ -671,6 +480,7 @@ int render() {
 	if (!show_menu) {
 		//	Circle((int)(clientWidth / 2), (int)(clientHeight / 2), fov, 0, full, true, 32, BLACK(255));
 		entityloop();
+		Sleep(1);
 	}
 
 
@@ -749,3 +559,167 @@ if (this->name.find("BP_CamperFemale01_Character") != std::string::npos) survivo
 		if (this->name.find("BP_CamperMale12_Character") != std::string::npos) survivorname = "Felix";
 
 */
+
+
+/*
+uint64_t playerinteractionhandler = Kernel::KeReadVirtualMemory<uint64_t>(apawn + 0x950);
+
+std::cout << "playerinteractionhandler " << playerinteractionhandler << std::endl;
+
+auto skillcheck = Kernel::KeReadVirtualMemory<USkillCheck>(playerinteractionhandler + 0x2D8);
+
+std::cout << "skillcheck " << PlayerCamera << std::endl;
+
+
+bool isdisplayed = skillcheck.
+
+if (isdisplayed == true)
+	std::cout << "skillcheck is displayed" << std::endl;
+*/
+/*
+uint64_t APawn = mem->Read<uint64_t>(PlayerController + 0x02B8);
+uint64_t UPlayerInteractionHandler = mem->Read<uint64_t>(APawn + 0x0960);
+
+uint64_t USkillCheck = mem->Read<uint64_t>(UPlayerInteractionHandler + 0x0230);
+
+bool HasSkillCheck = mem->Read<bool>(USkillCheck + 0x027C);
+
+auto Progress = mem->Read<float>(USkillCheck + 0x22C);
+auto SuccessZoneStart = mem->Read<float>(USkillCheck + 0x264);
+
+	*/
+
+	/*
+	Uworld>game_instance>localplayer>player_controller>APawn>UPlayerInteractionHandler
+
+uint64_t USkillCheck = read<uint64_t>(UPlayerInteractionHandler + 0x0280);
+int CurrentProgress = read<uint64_t>(USkillCheck + 0x022C);
+int BonusProgress = read<uint64_t>(USkillCheck + 0x0264);
+if (CurrentProgress > BonusProgress)
+			{
+	INPUT Input = { 0 };
+				Input.type = INPUT_KEYBOARD;
+				Input.ki.wVk = VK_SPACE;
+				SendInput(1, &Input, sizeof(Input));
+				Input.ki.dwFlags = KEYEVENTF_KEYUP;
+				SendInput(1, &Input, sizeof(Input));
+}
+
+	*/
+
+	//std::cout << "cameracachenentry " << CameraCacheEntry.TimeStamp << std::endl;
+	//std::cout << "cameracachenentryfov " << CameraCacheEntry.POV.FOV << std::endl;
+	/*
+	auto pawn = Kernel::KeReadVirtualMemory<uintptr_t>(playercontroller + 0x2B8);
+
+	auto interactionhandler = Kernel::KeReadVirtualMemory<uintptr_t>(actors + 0x0890);
+
+	std::cout << "interactionhandler" << interactionhandler << std::endl;
+
+	auto SkillCheck = Kernel::KeReadVirtualMemory<uintptr_t>(interactionhandler + 0x02D8);
+
+	std::cout << "SkillCheck" << SkillCheck << std::endl;
+
+	bool isdisplayed = Kernel::KeReadVirtualMemory<bool>(SkillCheck + 0x130);
+
+	std::cout << "isdisplayed" << isdisplayed << std::endl;
+
+	if (isdisplayed == false)
+		return;
+
+
+	float progress = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x134);
+
+	std::cout << "progress" << progress << std::endl;
+
+	float TARGET = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x184);
+	float successzonestart = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x134 + 0x4);
+	float successzoneend = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x134 + 0x4 + 0x4);
+	float bonuszonelength = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x134 + 0x4 + 0x4 + 0x4);
+	float currentprogress = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x134 + 0x4 + 0x4 + 0x4 + 0x4);
+
+
+		PlayerController->Pawn + 0x0828 = interactionHandler -> ptr
+		interactionHandler + 0x0140 = skillCheck -> ptr
+		skillCheck + 0x01D0 = bDisplayed -> bool
+
+		skillCheck + 0x01B4 = ProgressRate -> float
+		skillCheck + 0x01B8 = SuccessZoneStart -> float
+		skillCheck + 0x01BC = SuccessZoneEnd  ->float
+		skillCheck + 0x01C0 = BonusZoneLength -> float
+		skillCheck + 0x01D4 = currentProgress -> float
+
+		if(bDisplayed && (currentProgress > SuccessZoneStart && currentProgress < SuccessZoneEnd))
+		{
+			executeSkillCheck();
+		}
+	*/
+
+	//if (isdisplayed && (currentprogress > successzonestart && currentprogress < successzoneend))
+	//{
+	//	SendKeySpace();
+	//}
+	/*
+	if(bDisplayed && (currentProgress > SuccessZoneStart && currentProgress < SuccessZoneEnd))
+{
+	executeSkillCheck();
+}
+
+	*/
+	//matrix Matrix 7F310A0
+
+	//latest
+	/*
+		DWORD64 InteractionHandler = *(DWORD64*)(Pawn + 0x0950);
+DWORD64 SkillCheck = *(DWORD64*)(InteractionHandler + 0x0280);
+
+	SkillCheck:
+#define ISDISPLAY 0x130
+#define PROGRESS 0x134
+#define TARGET 0x184
+
+bool IsDisplayed = *(bool*)(SkillCheck + 0x027C);
+float CurrentProgress = *(float*)(SkillCheck + 0x022C);
+float BonusProgress = *(float*)(SkillCheck + 0x0264);
+
+	*/
+
+
+	/*
+	std::uint64_t playerstate = read<std::uint64_t>(apawn + 0x250);
+	FPlayerStateData playerstateData = read<FPlayerStateData>(playerstate + 0x3D0);
+	*/
+
+	//PlayerList : UWORLD -> 0x140 -> 0x710 -> 0x148 -> i * 0x10 // (not 0x8)
+	//PlayerCount: UWORLD -> 0x140 -> 0x710 -> 0x150
+
+	/*
+	var isDisplayed = Memory.ZwReadBool(processHandle, (IntPtr)USkillCheck.ToInt64() +0x0270);
+				if (isDisplayed)
+				{
+					var currentProgress = Memory.ZwReadFloat(processHandle,
+						(IntPtr)USkillCheck.ToInt64() + 0x022C);<-- wrong
+					var startSuccessZone = Memory.ZwReadFloat(processHandle,
+						(IntPtr)USkillCheck.ToInt64() + 0x0264);<--- wrong
+
+	*/
+
+	/*
+	DWORD64 InteractionHandler = *(DWORD64*)(Pawn + 0x0950);
+DWORD64 SkillCheck = *(DWORD64*)(InteractionHandler + 0x0280);
+
+bool IsDisplayed = *(bool*)(SkillCheck + 0x027C);
+float CurrentProgress = *(float*)(SkillCheck + 0x022C);
+float BonusProgress = *(float*)(SkillCheck + 0x0264);
+
+
+Please update
+
+	*/
+
+	/*
+	Managers::DBD::IsDisplayed = read<bool>(USkillCheck + 0x0288);
+		Managers::DBD::currentProgress = read<float>(USkillCheck + 0x028C);
+		Managers::DBD::startSuccessZone = read<float>(USkillCheck + 0x02D0);
+
+	*/
