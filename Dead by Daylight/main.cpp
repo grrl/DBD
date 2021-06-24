@@ -350,7 +350,7 @@ std::string searchlist[63] = {
 
 	"BP_CamperMale01_C", 
 	"BP_CamperMale02_Character_C", 
-	"BP_CamperMale04_Character_C"
+	"BP_CamperMale04_Character_C",
 	"BP_CamperMale05_Character_C",
 	"BP_CamperMale06_Character_C",
 	"BP_CamperMale07_Character_C",
