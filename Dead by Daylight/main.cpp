@@ -326,7 +326,7 @@ uint32_t BP_CamperFemale03_Character_C;
 uint32_t BP_CamperMale13_Character_C;
 uint32_t BP_Slasher_Character_23_C;
 
-std::string searchlist[63] = { 
+std::string searchlist[77] = {
 	"GeneratorHospital",
 	"GeneratorStandard_C",
 	"GeneratorLunarIndoors_C",
@@ -334,7 +334,7 @@ std::string searchlist[63] = {
 	"GeneratorNoPole_C",
 	"GeneratorShort_C",
 	"BP_CamperFemale01_C",
-	"BP_CamperFemale01_Character_C", 
+	"BP_CamperFemale01_Character_C",
 	"BP_CamperFemale02_Character_C",
 	"BP_CamperFemale03_Character_C",
 	"BP_CamperFemale04_Character_C",
@@ -348,8 +348,8 @@ std::string searchlist[63] = {
 	"BP_CamperFemale12_Character_C",
 	"BP_CamperFemale13_Character_C",
 
-	"BP_CamperMale01_C", 
-	"BP_CamperMale02_Character_C", 
+	"BP_CamperMale01_C",
+	"BP_CamperMale02_Character_C",
 	"BP_CamperMale04_Character_C",
 	"BP_CamperMale05_Character_C",
 	"BP_CamperMale06_Character_C",
@@ -392,7 +392,25 @@ std::string searchlist[63] = {
 	"SearchableSpawner-BP_TL_St_32x32_Foundry01_C",
 	"SearchableSpawner-BP_TL_Fr_16x16_LD03_C",
 	"SearchableSpawner-BP_TL_Lm_16x16_LumberPile01_C",
-	"Chest 2-basementSpawner02-BP_TL_St_16x16_Ind_Shack_C"
+	"Chest 2-basementSpawner02-BP_TL_St_16x16_Ind_Shack_C",
+
+	"pull01-BP_TL_Fr_16x16_LD01_C",
+	"pull01-BP_TL_Fr_16x16_LD02_C",
+	"pull01-BP_TL_Wl_16x16_HD01_C",
+	"pull01-BP_TL_Wl_16x16_MD02_C",
+	"pull01-BP_TL_Wl_16x16_MD01_C",
+
+	"pull02-BP_TL_Fr_16x16_LD01_C",
+	"pull02-BP_TL_Fr_16x16_LD02_C",
+	"pull02-BP_TL_Wl_16x16_HD01_C",
+	"pull02-BP_TL_Wl_16x16_MD01_C",
+	"pull02-BP_TL_Wl_16x16_MD02_C",
+
+	"Pull02-BP_TL_Wl_16x16_HD01_C",
+	"Pull02-BP_TL_St_32x32_Foundry01_C",
+
+	"Pull01-BP_TL_St_16x16_Ind_Shack_C",
+	"Pull01-BP_TL_Wl_16x16_HD01_C"
 };
 
 std::map<uint32_t, std::string> hitlist;
@@ -504,6 +522,8 @@ void entityloop() {
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
 			else if (search.find("BP_Hatch") != std::string::npos)
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
+			else if (search.find("pull") != std::string::npos || search.find("Pull") != std::string::npos)
+				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
 			else
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 		}
@@ -512,7 +532,7 @@ void entityloop() {
 			std::string objectname = GetFullNamesByObjID(actorid);
 
 			//HERE HATCH
-			/*
+			
 			std::cout << "string is " << objectname.c_str() << std::endl;
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 			if (EntityRootComp == NULL)
@@ -524,7 +544,7 @@ void entityloop() {
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 			*/
 
-			for (int i = 0; i < 63; i++) {
+			for (int i = 0; i < 77; i++) {
 
 				if (searchlist[i] == objectname) {
 					//std::cout << searchlist[i].c_str() << " equals " << objectname.c_str() << std::endl;
@@ -532,6 +552,8 @@ void entityloop() {
 						hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
 					break;
 				}
+				//else if (objectname.length() > 0)
+				//	std::cout << objectname.c_str() << std::endl;
 			}
 
 
