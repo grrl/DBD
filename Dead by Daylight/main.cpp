@@ -4,7 +4,6 @@
 #include <dwmapi.h>
 #include <ctime>
 #include <map>
-#include <cctype>
 #include "driver.h"
 #include "macro.h"
 #include "w2s.h"
@@ -427,14 +426,12 @@ std::string searchlist[59] = {
 	"BP_Slasher_Character_24_C",
 	"BP_Hatch01",
 	"BP_Hatch01_C"
+	//"BP_TL_Bd_Escape01_C"
+	//"BP_TL_Bd_Escape01_C"
 
 };
 
 std::map<uint32_t, std::string> hitlist;
-
-bool isNotAlnum(char c) {
-	return isalnum(c) == 0;
-}
 
 //GeneratorLunarIndoors_C; GeneratorSuburbs_C; GeneratorStandard_C; GeneratorHospital_C; "
 void entityloop() {
@@ -555,7 +552,14 @@ void entityloop() {
 
 			//objectname[0] = toupper(objectname[0]);
 
+			if (objectname.length() == 0)
+				continue;
+
+			//std::cout << "obj " << objectname.c_str() << std::endl;
+
+			//Escape-BP_TL_Bd_Escape01_C
 			//HERE HATCH
+
 			/*
 			std::cout << "string is " << objectname.c_str() << std::endl;
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
@@ -571,11 +575,6 @@ void entityloop() {
 			//strcat(result, buffer); // append string two to the result.
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 			*/
-
-			if (objectname.length() == 0)
-				continue;
-
-			//objectname.erase(remove_if(objectname.begin(), objectname.end(), isNotAlnum), objectname.end());
 
 			for (int i = 0; i < 59; i++) {
 
