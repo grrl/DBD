@@ -364,7 +364,7 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[60] = {
+std::string searchlist[62] = {
 	"GeneratorHospital",
 	"GeneratorStandard_C",
 	"GeneratorLunarIndoors_C",
@@ -426,7 +426,10 @@ std::string searchlist[60] = {
 	"BP_Slasher_Character_23_C",
 	"BP_Slasher_Character_24_C",
 	"BP_Hatch01",
-	"BP_Hatch01_C"
+	"BP_Hatch01_C",
+
+	"BearTrap_C",
+	"BP_BearTrap_001_C"
 	//"BP_TL_Bd_Escape01_C"
 	//"BP_TL_Bd_Escape01_C"
 
@@ -561,7 +564,7 @@ void entityloop() {
 			//Escape-BP_TL_Bd_Escape01_C
 			//HERE HATCH
 
-			/*
+			
 			std::cout << "string is " << objectname.c_str() << std::endl;
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 			if (EntityRootComp == NULL)
@@ -575,9 +578,9 @@ void entityloop() {
 			//char result[6];   // array to hold the result.
 			//strcat(result, buffer); // append string two to the result.
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-			*/
+			
 
-			for (int i = 0; i < 60; i++) {
+			for (int i = 0; i < 62; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
@@ -594,194 +597,7 @@ void entityloop() {
 
 
 		}
-		/*
 
-		if (generator != NULL && ActorID == generator) {
-
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"Generator", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-		}
-		else if (ActorID_chest != NULL && ActorID == ActorID_chest) {
-
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"Chest", PlayerScreenPos.X, PlayerScreenPos.Y, 240, 240, 214, dx_FontCalibri);
-		}
-		else if (BP_CamperFemale01_Character_C != NULL && ActorID == BP_CamperFemale01_Character_C) {
-
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"CamperFemale01", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-		}
-		else if (BP_CamperFemale02_Character_C != NULL && ActorID == BP_CamperFemale02_Character_C) {
-
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"CamperFemale02", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-		}
-		else if (BP_CamperMale01_C != NULL && ActorID == BP_CamperMale01_C) {
-
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"CamperMale01", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-		}
-		else if (BP_CamperMale02_Character_C != NULL && ActorID == BP_CamperMale02_Character_C) {
-
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"CamperMale02", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-		}
-		else if (BP_Slasher_Character_01_C != NULL && ActorID == BP_Slasher_Character_01_C) {
-
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"BP_Slasher_Character_01", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-		}
-		/*
-		else if (Chest2_Basement_BP_TL_St_32x32_Foundry01_C != NULL && ActorID == Chest2_Basement_BP_TL_St_32x32_Foundry01_C) {
-
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"Chest 2-Basement", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
-		}
-		else if (SearchableSpawner_BP_TL_Fr_16x16_HD03_C != NULL && ActorID == SearchableSpawner_BP_TL_Fr_16x16_HD03_C) {
-
-			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-			DrawString((char*)"SearchableSpawner", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
-		}
-
-		else if (generator == NULL || BP_CamperMale01_C == NULL || BP_CamperMale02_Character_C == NULL || BP_CamperFemale01_Character_C == NULL || BP_Slasher_Character_01_C == NULL || BP_CamperFemale02_Character_C == NULL) {
-
-
-			std::string ObjectName = GetFullNamesByObjID(ActorID);
-
-			std::cout << "string is " << ObjectName.c_str() << std::endl;
-
-			if (ObjectName == "GeneratorHospital" || ObjectName == "GeneratorStandard_C" || ObjectName == "GeneratorLunarIndoors_C" || ObjectName == "GeneratorSuburbs_C") {
-
-				if (generator == NULL || generator != ActorID)
-					generator = ActorID;
-
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"Generator", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-			}
-			else if (ObjectName == "BP_Slasher_Character_01_C") {
-
-				if (BP_Slasher_Character_01_C == NULL || BP_Slasher_Character_01_C != ActorID)
-					BP_Slasher_Character_01_C = ActorID;
-
-
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"Slasher_Character_01", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			}
-			else if (ObjectName == "BP_CamperFemale01_Character_C") {
-
-				if (BP_CamperFemale01_Character_C == NULL || BP_CamperFemale01_Character_C != ActorID)
-					BP_CamperFemale01_Character_C = ActorID;
-
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"CamperFemale01", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			}
-			else if (ObjectName == "BP_CamperFemale02_Character_C") {
-
-				if (BP_CamperFemale02_Character_C == NULL || BP_CamperFemale02_Character_C != ActorID)
-					BP_CamperFemale02_Character_C = ActorID;
-
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"CamperFemale02", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			}
-			else if (ObjectName == "BP_CamperMale01_C") {
-				if (BP_CamperMale01_C == NULL || BP_CamperMale01_C != ActorID)
-					BP_CamperMale01_C = ActorID;
-
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"CamperMale01", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			}
-			else if (ObjectName == "BP_CamperMale02_Character_C") {
-				if (BP_CamperMale02_Character_C == NULL || BP_CamperMale02_Character_C != ActorID)
-					BP_CamperMale02_Character_C = ActorID;
-
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"CamperMale02", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			}
-			/*
-			else if (ObjectName == "Chest 2-Basement-BP_TL_St_32x32_Foundry01_C") {
-
-				if (Chest2_Basement_BP_TL_St_32x32_Foundry01_C == NULL || Chest2_Basement_BP_TL_St_32x32_Foundry01_C != ActorID)
-					Chest2_Basement_BP_TL_St_32x32_Foundry01_C = ActorID;
-
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"Chest 2-Basement", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
-			}
-			else if (ObjectName == "SearchableSpawner-BP_TL_Fr_16x16_HD03_C") {
-
-
-				if (SearchableSpawner_BP_TL_Fr_16x16_HD03_C == NULL || SearchableSpawner_BP_TL_Fr_16x16_HD03_C != ActorID)
-					SearchableSpawner_BP_TL_Fr_16x16_HD03_C = ActorID;
-
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"SearchableSpawner", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
-			}
-
-			else
-			{
-
-				std::cout << "string is " << ObjectName.c_str() << std::endl;
-
-				//uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-
-				//FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-
-
-				//std::cout << "pos fov " << CameraCacheEntry.FOV << std::endl;
-
-				//FVector loc = WorldToScreen(CameraCacheEntry.POV, pos);
-				//FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-
-
-				//if (loc.X > 0 && loc.X <= 1920 && loc.Y > 0 && loc.Y <= 1080)
-					//std::cout << "w2s locx " << loc.X << " w2sy " << loc.Y << std::endl;
-
-				//char buffer[20];
-				//double dist2 = dist >= 0. ? floor(dist*100.) / 100. : ceil(dist*100.) / 100.;
-				//int ret = snprintf(buffer, sizeof buffer, "%d", ActorID);
-				//printf("%d\n", dist);
-				//char result[6];   // array to hold the result.
-
-				//strcat(result, buffer); // append string two to the result.
-
-				//std::cout << "actorid " << ActorID << std::endl;
-
-				//DrawString((char*)ObjectName.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-			}
-			*/
 	}
 
 }
