@@ -364,7 +364,7 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[59] = {
+std::string searchlist[60] = {
 	"GeneratorHospital",
 	"GeneratorStandard_C",
 	"GeneratorLunarIndoors_C",
@@ -385,6 +385,7 @@ std::string searchlist[59] = {
 	"BP_CamperFemale11_Character_C",
 	"BP_CamperFemale12_Character_C",
 	"BP_CamperFemale13_Character_C",
+	"BP_CamperFemale14_Character_C",
 
 	"BP_CamperMale01_C",
 	"BP_CamperMale02_Character_C",
@@ -576,7 +577,7 @@ void entityloop() {
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 			*/
 
-			for (int i = 0; i < 59; i++) {
+			for (int i = 0; i < 60; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
