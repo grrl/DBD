@@ -364,7 +364,7 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[67] = {
+std::string searchlist[60] = {
 	"GeneratorHospital",
 	"GeneratorStandard_C",
 	"GeneratorLunarIndoors_C",
@@ -426,17 +426,10 @@ std::string searchlist[67] = {
 	"BP_Slasher_Character_23_C",
 	"BP_Slasher_Character_24_C",
 	"BP_Hatch01",
-	"BP_Hatch01_C",
+	"BP_Hatch01_C"
 
-	"BearTrap_C",
-	"BP_BearTrap_001_C",
-	"HexSpawner01-BP_TL_Fr_16x16_LD03_C",
-	"HexSpawner01-BP_TL_Wl_16x16_MD01_C",
-	"HexSpawner01-BP_TL_Fr_16x16_LD03_C",
-	"HexSpawner01-BP_TL_Wl_16x16_MD01_C",
-	"HexSpawner01-BP_TL_Fr_16x16_LD03_C"
-	//"HexSpawner1-BP_TL_St_32x32_Foundry01_C¬ZA"
-
+	//"BearTrap_C",
+	//"BP_BearTrap_001_C",
 	//"BP_TL_Bd_Escape01_C"
 	//"BP_TL_Bd_Escape01_C"
 
@@ -455,6 +448,9 @@ char p = 'p';
 char l = 'l';
 char u = 'u';
 char P = 'P';
+char B = 'B';
+char a = 'a';
+char r = 'r';
 
 //GeneratorLunarIndoors_C; GeneratorSuburbs_C; GeneratorStandard_C; GeneratorHospital_C; "
 void entityloop() {
@@ -607,21 +603,6 @@ void entityloop() {
 				DrawString((char*)"Totem", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
 				continue;
 			}
-			/*
-			else if (objectname[0] == c && objectname[1] == h && objectname[2] == e && objectname[3] == s && objectname[4] == t) {
-				std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
-
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				if (EntityRootComp == NULL)
-					continue;
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
-					continue;
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"Chest", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
-				continue;
-			}
-			*/
 			else if (objectname[0] == P && objectname[1] == u && objectname[2] == l && objectname[3] == l) {
 				std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
 
@@ -632,7 +613,7 @@ void entityloop() {
 				if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
 					continue;
 				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"pull", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
+				DrawString((char*)"Pull", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
 				continue;
 			}
 			else if (objectname[0] == p && objectname[1] == u && objectname[2] == l && objectname[3] == l) {
@@ -648,8 +629,21 @@ void entityloop() {
 				DrawString((char*)"pull", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
 				continue;
 			}
+			else if (objectname[0] == B && objectname[1] == e && objectname[2] == a && objectname[3] == r) {
+				std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
 
-			for (int i = 0; i < 67; i++) {
+				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
+				if (EntityRootComp == NULL)
+					continue;
+				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+				if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
+					continue;
+				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+				DrawString((char*)"beartrap", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
+				continue;
+			}
+
+			for (int i = 0; i < 60; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
