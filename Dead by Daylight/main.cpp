@@ -385,6 +385,9 @@ std::string searchlist[73] = {
 
 	"GeneratorShort_C",
 	"GeneratorShort_C_Anniversary2020_C",
+	
+	"GeneratorIndoor_C",
+	"GeneratorIndoor_Anniversary2020_C",
 
 	"BP_CamperFemale01_C",
 	"BP_CamperFemale01_Character_C",
@@ -403,7 +406,6 @@ std::string searchlist[73] = {
 	"BP_CamperFemale14_Character_C",
 	"BP_CamperFemale15_Character_C",
 	"BP_CamperFemale16_Character_C",
-	"BP_CamperFemale17_Character_C",
 
 	"BP_CamperMale01_C",
 	"BP_CamperMale02_Character_C",
@@ -420,7 +422,6 @@ std::string searchlist[73] = {
 	"BP_CamperMale14_Character_C",
 	"BP_CamperMale15_Character_C",
 	"BP_CamperMale16_Character_C",
-	"BP_CamperMale17_Character_C",
 
 	"BP_Slasher_Character_01_C",
 	"BP_Slasher_Character_02_C",
@@ -596,7 +597,7 @@ void entityloop() {
 			//std::cout << "obj " << objectname.c_str() << std::endl;
 
 			//HERE HATCH
-			
+			/*
 			std::cout << "string is " << objectname.c_str() << std::endl;
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 			if (EntityRootComp == NULL)
@@ -606,8 +607,7 @@ void entityloop() {
 				continue;
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-			
-
+			*/
 			
 			if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' &&
 				objectname[3] == 'T' && objectname[4] == 'o' && objectname[5] == 't') {
