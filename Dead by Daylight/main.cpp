@@ -366,14 +366,26 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[62] = {
+std::string searchlist[73] = {
+
 	"GeneratorHospital",
+	"GeneratorHospital_Anniversary2020_C",
+
 	"GeneratorStandard_C",
-	"GeneratorLunarIndoors_C",
-	"GeneratorSuburbs_C",
-	"GeneratorNoPole_C",
-	"GeneratorShort_C",
 	"GeneratorStandard_Anniversary2020_C",
+
+	"GeneratorLunarIndoors_C",
+	"GeneratorLunarIndoors_Anniversary2020_C",
+
+	"GeneratorSuburbs_C",
+	"GeneratorSuburbs_Anniversary2020_C",
+
+	"GeneratorNoPole_C",
+	"GeneratorNoPole_Anniversary2020_C",
+
+	"GeneratorShort_C",
+	"GeneratorShort_C_Anniversary2020_C",
+
 	"BP_CamperFemale01_C",
 	"BP_CamperFemale01_Character_C",
 	"BP_CamperFemale02_Character_C",
@@ -389,6 +401,9 @@ std::string searchlist[62] = {
 	"BP_CamperFemale12_Character_C",
 	"BP_CamperFemale13_Character_C",
 	"BP_CamperFemale14_Character_C",
+	"BP_CamperFemale15_Character_C",
+	"BP_CamperFemale16_Character_C",
+	"BP_CamperFemale17_Character_C",
 
 	"BP_CamperMale01_C",
 	"BP_CamperMale02_Character_C",
@@ -402,6 +417,10 @@ std::string searchlist[62] = {
 	"BP_CamperMale11_Character_C",
 	"BP_CamperMale12_Character_C",
 	"BP_CamperMale13_Character_C",
+	"BP_CamperMale14_Character_C",
+	"BP_CamperMale15_Character_C",
+	"BP_CamperMale16_Character_C",
+	"BP_CamperMale17_Character_C",
 
 	"BP_Slasher_Character_01_C",
 	"BP_Slasher_Character_02_C",
@@ -429,9 +448,9 @@ std::string searchlist[62] = {
 	"BP_Slasher_Character_23_C",
 	"BP_Slasher_Character_24_C",
 	"BP_Hatch01",
-	"BP_Hatch01_C",
-	"BP_TotemBase_C"
+	"BP_Hatch01_C"
 
+	//"BP_TotemBase_C"
 	//"BearTrap_C",
 	//"BP_BearTrap_001_C",
 	//"BP_TL_Bd_Escape01_C"
@@ -442,7 +461,7 @@ std::string searchlist[62] = {
 //std::array<const char*, 20> totemlist2;
 
 std::vector <std::string> totemlist(15);
-
+int totemlistnumber = 0;
 
 std::map<uint32_t, std::string> hitlist;
 
@@ -479,6 +498,7 @@ void entityloop() {
 	else if (actor_count < 80) {
 		
 		totemlist.clear();
+		totemlistnumber = 0;
 		hitlist.clear();
 		return;
 	}
@@ -557,7 +577,7 @@ void entityloop() {
 			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
 			else if (search.find("BP_Hatch") != std::string::npos)
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
-			else if (search.find("Hex") != std::string::npos)
+			else if (search.find("BP_Totem") != std::string::npos)
 				DrawString((char*)"Totem", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
 			//else if (search.find("pull") != std::string::npos || search.find("Pull") != std::string::npos)
 			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
@@ -576,7 +596,7 @@ void entityloop() {
 			//std::cout << "obj " << objectname.c_str() << std::endl;
 
 			//HERE HATCH
-			/*
+			
 			std::cout << "string is " << objectname.c_str() << std::endl;
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 			if (EntityRootComp == NULL)
@@ -586,24 +606,33 @@ void entityloop() {
 				continue;
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-			*/
+			
 
 			
-			//if (objectname[0] == 'H' && objectname[1] == 'e' && objectname[2] == 'x') {
+			if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' &&
+				objectname[3] == 'T' && objectname[4] == 'o' && objectname[5] == 't') {
 
-				/*
+				
 				if (std::find(totemlist.begin(), totemlist.end(), objectname) != totemlist.end())
 				{
 					// Element in vector.
+					if (hitlist.count(actorid) == 0) {
+						std::string myownstring = objectname;
+						myownstring += totemlistnumber;
+						hitlist.insert(std::pair< uint32_t, std::string >(actorid, myownstring));
+						totemlistnumber += 1;
+					}
+
 				}
 				else {
+
+					// Element not in vector.
 					std::cout << "pushing " << objectname.c_str() << std::endl;
 					totemlist.push_back(objectname.c_str());
 					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
-					// Element not in vector.
 					continue;
 				}
-				*/
+				
 
 
 				//std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
@@ -618,7 +647,7 @@ void entityloop() {
 				DrawString((char*)"Totem", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
 				continue;
 				*/
-			//}
+			}
 			/*
 			else if (objectname[0] == P && objectname[1] == u && objectname[2] == l && objectname[3] == l) {
 				std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
@@ -663,7 +692,7 @@ void entityloop() {
 				continue;
 			}
 			*/
-			for (int i = 0; i < 62; i++) {
+			for (int i = 0; i < 73; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
