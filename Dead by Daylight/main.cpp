@@ -366,13 +366,14 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[60] = {
+std::string searchlist[62] = {
 	"GeneratorHospital",
 	"GeneratorStandard_C",
 	"GeneratorLunarIndoors_C",
 	"GeneratorSuburbs_C",
 	"GeneratorNoPole_C",
 	"GeneratorShort_C",
+	"GeneratorStandard_Anniversary2020_C",
 	"BP_CamperFemale01_C",
 	"BP_CamperFemale01_Character_C",
 	"BP_CamperFemale02_Character_C",
@@ -428,7 +429,8 @@ std::string searchlist[60] = {
 	"BP_Slasher_Character_23_C",
 	"BP_Slasher_Character_24_C",
 	"BP_Hatch01",
-	"BP_Hatch01_C"
+	"BP_Hatch01_C",
+	"BP_TotemBase_C"
 
 	//"BearTrap_C",
 	//"BP_BearTrap_001_C",
@@ -587,8 +589,9 @@ void entityloop() {
 			*/
 
 			
-			if (objectname[0] == 'H' && objectname[1] == 'e' && objectname[2] == 'x') {
+			//if (objectname[0] == 'H' && objectname[1] == 'e' && objectname[2] == 'x') {
 
+				/*
 				if (std::find(totemlist.begin(), totemlist.end(), objectname) != totemlist.end())
 				{
 					// Element in vector.
@@ -600,7 +603,7 @@ void entityloop() {
 					// Element not in vector.
 					continue;
 				}
-
+				*/
 
 
 				//std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
@@ -615,7 +618,7 @@ void entityloop() {
 				DrawString((char*)"Totem", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
 				continue;
 				*/
-			}
+			//}
 			/*
 			else if (objectname[0] == P && objectname[1] == u && objectname[2] == l && objectname[3] == l) {
 				std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
@@ -660,7 +663,7 @@ void entityloop() {
 				continue;
 			}
 			*/
-			for (int i = 0; i < 60; i++) {
+			for (int i = 0; i < 62; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
