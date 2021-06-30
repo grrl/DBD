@@ -621,6 +621,7 @@ void entityloop() {
 						myownstring += totemlistnumber;
 						hitlist.insert(std::pair< uint32_t, std::string >(actorid, myownstring));
 						totemlistnumber += 1;
+						continue;
 					}
 
 				}
