@@ -4,6 +4,8 @@
 #include <dwmapi.h>
 #include <ctime>
 #include <map>
+#include <vector>
+#include <algorithm>
 #include "driver.h"
 #include "macro.h"
 #include "w2s.h"
@@ -435,22 +437,13 @@ std::string searchlist[60] = {
 
 };
 
+//std::array<const char*, 20> totemlist2;
+
+std::vector <std::string> totemlist(15);
+
+
 std::map<uint32_t, std::string> hitlist;
 
-char H = 'H';
-char e = 'e';
-char x = 'x';
-char s = 's';
-char t = 't';
-char c = 'c';
-char h = 'h';
-char p = 'p';
-char l = 'l';
-char u = 'u';
-char P = 'P';
-char B = 'B';
-char a = 'a';
-char r = 'r';
 
 //GeneratorLunarIndoors_C; GeneratorSuburbs_C; GeneratorStandard_C; GeneratorHospital_C; "
 void entityloop() {
@@ -482,6 +475,8 @@ void entityloop() {
 
 	}
 	else if (actor_count < 80) {
+		
+		totemlist.clear();
 		hitlist.clear();
 		return;
 	}
@@ -560,6 +555,8 @@ void entityloop() {
 			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
 			else if (search.find("BP_Hatch") != std::string::npos)
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
+			else if (search.find("Hex") != std::string::npos)
+				DrawString((char*)"Totem", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
 			//else if (search.find("pull") != std::string::npos || search.find("Pull") != std::string::npos)
 			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
 			else
@@ -590,10 +587,24 @@ void entityloop() {
 			*/
 
 			
-			if (objectname[0] == H && objectname[1] == e && objectname[2] == x) {
+			if (objectname[0] == 'H' && objectname[1] == 'e' && objectname[2] == 'x') {
 
-				std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
+				if (std::find(totemlist.begin(), totemlist.end(), objectname) != totemlist.end())
+				{
+					// Element in vector.
+				}
+				else {
+					std::cout << "pushing " << objectname.c_str() << std::endl;
+					totemlist.push_back(objectname.c_str());
+					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
+					// Element not in vector.
+					continue;
+				}
 
+
+
+				//std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
+				/*
 				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 				if (EntityRootComp == NULL)
 					continue;
@@ -603,6 +614,7 @@ void entityloop() {
 				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 				DrawString((char*)"Totem", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
 				continue;
+				*/
 			}
 			/*
 			else if (objectname[0] == P && objectname[1] == u && objectname[2] == l && objectname[3] == l) {
@@ -632,8 +644,10 @@ void entityloop() {
 				continue;
 			}
 			*/
-			else if (objectname[0] == B && objectname[1] == e && objectname[2] == a && objectname[3] == r) {
-				std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
+
+			/*
+			else if (objectname[0] == 'B' && objectname[1] == 'e' && objectname[2] == 'a' && objectname[3] == 'r') {
+				//std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
 
 				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 				if (EntityRootComp == NULL)
@@ -645,7 +659,7 @@ void entityloop() {
 				DrawString((char*)"beartrap", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
 				continue;
 			}
-
+			*/
 			for (int i = 0; i < 60; i++) {
 
 				if (searchlist[i] == objectname) {
