@@ -385,7 +385,7 @@ std::string searchlist[73] = {
 
 	"GeneratorShort_C",
 	"GeneratorShort_C_Anniversary2020_C",
-	
+
 	"GeneratorIndoor_C",
 	"GeneratorIndoor_Anniversary2020_C",
 
@@ -462,7 +462,10 @@ std::string searchlist[73] = {
 //std::array<const char*, 20> totemlist2;
 
 std::vector <std::string> totemlist(15);
+std::vector <std::string> pull_list(15);
+
 int totemlistnumber = 0;
+int pull_list_number = 0;
 
 std::map<uint32_t, std::string> hitlist;
 
@@ -497,9 +500,11 @@ void entityloop() {
 
 	}
 	else if (actor_count < 80) {
-		
+
 		totemlist.clear();
+		pull_list.clear();
 		totemlistnumber = 0;
+		pull_list_number = 0;
 		hitlist.clear();
 		return;
 	}
@@ -580,8 +585,10 @@ void entityloop() {
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
 			else if (search.find("BP_Totem") != std::string::npos)
 				DrawString((char*)"Totem", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
-			//else if (search.find("pull") != std::string::npos || search.find("Pull") != std::string::npos)
-			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
+			else if (search.find("pull") != std::string::npos)
+				DrawString((char*)"pull", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
+			else if (search.find("Pull") != std::string::npos)
+				DrawString((char*)"Pull", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
 			else
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 		}
@@ -608,11 +615,11 @@ void entityloop() {
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 			*/
-			
+
 			if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' &&
 				objectname[3] == 'T' && objectname[4] == 'o' && objectname[5] == 't') {
 
-				
+
 				if (std::find(totemlist.begin(), totemlist.end(), objectname) != totemlist.end())
 				{
 					// Element in vector.
@@ -633,22 +640,31 @@ void entityloop() {
 					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
 					continue;
 				}
-				
-
-
-				//std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
-				/*
-				uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
-				if (EntityRootComp == NULL)
-					continue;
-				FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-				if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
-					continue;
-				FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
-				DrawString((char*)"Totem", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
-				continue;
-				*/
 			}
+			else if (objectname[0] == 'P' && objectname[1] == 'u' && objectname[2] == 'l' && objectname[3] == 'l' || objectname[0] == 'p' && objectname[1] == 'u' && objectname[2] == 'l' && objectname[3] == 'l') {
+				
+				if (std::find(pull_list.begin(), pull_list.end(), objectname) != pull_list.end())
+				{
+					// Element in vector.
+					if (hitlist.count(actorid) == 0) {
+						std::string myownstring = objectname;
+						myownstring += pull_list_number;
+						hitlist.insert(std::pair< uint32_t, std::string >(actorid, myownstring));
+						totemlistnumber += 1;
+						continue;
+					}
+
+				}
+				else {
+
+					// Element not in vector.
+					std::cout << "pushing " << objectname.c_str() << std::endl;
+					pull_list.push_back(objectname.c_str());
+					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
+					continue;
+				}
+
+			};
 			/*
 			else if (objectname[0] == P && objectname[1] == u && objectname[2] == l && objectname[3] == l) {
 				std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
