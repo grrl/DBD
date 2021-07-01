@@ -23,6 +23,7 @@
 HWND hGameWnd;
 const static int uworld_offset = 0x8D5B600;//0x8CFB040;//0x8CFAF00;
 const static int gnames_offset = 0x8B8C040;//0x8B2BA80;//0x8B2B940;
+//gnames == namepool
 const static int persistentlevel_offset = 0x38;
 const static int actors_offset = 0xa0;
 const static int actor_count_offset = 0xa8;
@@ -366,7 +367,7 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[72] = {
+std::string searchlist[73] = {
 
 	"GeneratorHospital",
 	"GeneratorHospital_Anniversary2020_C",
@@ -443,7 +444,8 @@ std::string searchlist[72] = {
 
 	"Bookshelf_C",
 	"BP_Hatch01",
-	"BP_Hatch01_C"
+	"BP_Hatch01_C",
+	"BP_BearTrap_001_C"
 	//"ClosetStandard_Anniversary2020_C",
 	//"ClosetStandard_C",
 	//"BP_Wal_CatLocker_01_C"
@@ -670,7 +672,7 @@ void entityloop() {
 			}
 	
 
-			for (int i = 0; i < 72; i++) {
+			for (int i = 0; i < 73; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
