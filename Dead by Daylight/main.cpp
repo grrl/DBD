@@ -461,12 +461,12 @@ std::string searchlist[73] = {
 //std::array<const char*, 20> totemlist2;
 
 std::vector <std::string> totemlist(15);
-//std::vector <std::string> pull_list(30);
+std::vector <std::string> pull_list(30);
 std::vector <std::string> bear_list(15);
 
 
 int totemlistnumber = 0;
-//int pull_list_number = 0;
+int pull_list_number = 0;
 int bear_list_number = 0;
 
 //int book_list_number = 0;
@@ -506,11 +506,11 @@ void entityloop() {
 	else if (actor_count < 80) {
 
 		totemlist.clear();
-		//pull_list.clear();
+		pull_list.clear();
 		bear_list.clear();
 		//book_list.clear();
 		totemlistnumber = 0;
-		//pull_list_number = 0;
+		pull_list_number = 0;
 		bear_list_number = 0;
 		//book_list_number = 0;
 		hitlist.clear();
@@ -642,6 +642,30 @@ void entityloop() {
 					// Element not in vector.
 					std::cout << "pushing " << objectname.c_str() << std::endl;
 					totemlist.push_back(objectname.c_str());
+					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
+					continue;
+				}
+			}
+			else if (objectname[0] == 'p' && objectname[1] == 'u' && objectname[2] == 'l' && objectname[3] == 'l' || objectname[0] == 'P' && objectname[1] == 'u' && objectname[2] == 'l' && objectname[3] == 'l') {
+				//std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
+
+				if (std::find(pull_list.begin(), pull_list.end(), objectname) != pull_list.end())
+				{
+					// Element in vector.
+					if (hitlist.count(actorid) == 0) {
+						std::string myownstring = objectname;
+						myownstring += pull_list_number;
+						hitlist.insert(std::pair< uint32_t, std::string >(actorid, myownstring));
+						pull_list_number += 1;
+					}
+
+					continue;
+				}
+				else {
+
+					// Element not in vector.
+					std::cout << "pushing " << objectname.c_str() << std::endl;
+					pull_list.push_back(objectname.c_str());
 					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
 					continue;
 				}
