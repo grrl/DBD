@@ -607,7 +607,7 @@ void entityloop() {
 			//std::cout << "obj " << objectname.c_str() << std::endl;
 
 			//HERE HATCH
-			
+			/*
 			std::cout << "string is " << objectname.c_str() << std::endl;
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 			if (EntityRootComp == NULL)
@@ -617,7 +617,7 @@ void entityloop() {
 				continue;
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
-			
+			*/
 
 			if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' &&
 				objectname[3] == 'T' && objectname[4] == 'o' && objectname[5] == 't') {
