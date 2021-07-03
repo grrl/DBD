@@ -367,8 +367,9 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[73] = {
+std::string searchlist[72] = {
 
+	
 	"GeneratorHospital",
 	"GeneratorHospital_Anniversary2020_C",
 	"GeneratorStandard_C",
@@ -383,7 +384,6 @@ std::string searchlist[73] = {
 	"GeneratorShort_Anniversary2020_C",
 	"GeneratorIndoor_C",
 	"GeneratorIndoor_Anniversary2020_C",
-
 	"BP_CamperFemale01_C",
 	"BP_CamperFemale01_Character_C",
 	"BP_CamperFemale02_Character_C",
@@ -414,8 +414,6 @@ std::string searchlist[73] = {
 	"BP_CamperMale11_Character_C",
 	"BP_CamperMale12_Character_C",
 	"BP_CamperMale13_Character_C",
-	"BP_CamperMale14_Character_C",
-
 	"BP_Slasher_Character_01_C",
 	"BP_Slasher_Character_02_C",
 	"BP_Slasher_Character_03_C",
@@ -463,12 +461,15 @@ std::string searchlist[73] = {
 std::vector <std::string> totemlist(15);
 std::vector <std::string> pull_list(30);
 std::vector <std::string> bear_list(15);
+std::vector <std::string> chest_list(15);
+//std::vector <std::string> generator_list(20);
 
 
 int totemlistnumber = 0;
 int pull_list_number = 0;
 int bear_list_number = 0;
-
+int chest_list_number = 0;
+//int generator_list_number = 0;
 //int book_list_number = 0;
 
 std::map<uint32_t, std::string> hitlist;
@@ -508,10 +509,14 @@ void entityloop() {
 		totemlist.clear();
 		pull_list.clear();
 		bear_list.clear();
+		chest_list.clear();
+		//generator_list.clear();
 		//book_list.clear();
 		totemlistnumber = 0;
 		pull_list_number = 0;
 		bear_list_number = 0;
+		chest_list_number = 0;
+		//generator_list_number = 0;
 		//book_list_number = 0;
 		hitlist.clear();
 		return;
@@ -575,10 +580,13 @@ void entityloop() {
 				continue;
 			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
 
-			if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
-				continue;
+			//if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
+			//	continue;
 
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+
+			if (PlayerScreenPos.X == 0 || PlayerScreenPos.Y == 0)
+				continue;
 
 			//std::cout << "hitlist " << search.c_str() << std::endl;
 
@@ -592,6 +600,8 @@ void entityloop() {
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
 			else if (search.find("BP_Totem") != std::string::npos)
 				DrawString((char*)"Totem", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
+			else if (search.find("BP_Chest") != std::string::npos)
+				DrawString((char*)"Chest", PlayerScreenPos.X, PlayerScreenPos.Y, 0, 191, 255, dx_FontCalibri);
 			else if (search.find("Bear") != std::string::npos)
 				DrawString((char*)"Beartrap", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
 			else
@@ -603,8 +613,8 @@ void entityloop() {
 
 			//objectname[0] = toupper(objectname[0]);
 
-			if (objectname.length() == 0)
-				continue;
+			//if (objectname.length() == 0)
+			//	continue;
 
 			//std::cout << "obj " << objectname.c_str() << std::endl;
 
@@ -615,8 +625,8 @@ void entityloop() {
 			if (EntityRootComp == NULL)
 				continue;
 			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
-			if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
-				continue;
+			//if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
+			//	continue;
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 			DrawString((char*)objectname.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 			*/
@@ -642,6 +652,56 @@ void entityloop() {
 					// Element not in vector.
 					std::cout << "pushing " << objectname.c_str() << std::endl;
 					totemlist.push_back(objectname.c_str());
+					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
+					continue;
+				}
+			}
+			/*
+			if (objectname[0] == 'G' && objectname[1] == 'e' && objectname[2] == 'n' && objectname[3] == 'e' && objectname[4] == 'r' && objectname[5] == 'a' && objectname[6] == 't' && objectname[7] == 'o' && objectname[8] == 'r') {
+
+
+				if (std::find(generator_list.begin(), generator_list.end(), objectname) != generator_list.end())
+				{
+					// Element in vector.
+					if (hitlist.count(actorid) == 0) {
+						std::string myownstring = objectname;
+						myownstring += generator_list_number;
+						hitlist.insert(std::pair< uint32_t, std::string >(actorid, myownstring));
+						generator_list_number += 1;
+					}
+
+					continue;
+				}
+				else {
+
+					// Element not in vector.
+					std::cout << "pushing " << objectname.c_str() << std::endl;
+					generator_list.push_back(objectname.c_str());
+					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
+					continue;
+				}
+			}
+			*/
+			if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' && objectname[3] == 'C' && objectname[4] == 'h' && objectname[5] == 'e') {
+
+
+				if (std::find(chest_list.begin(), chest_list.end(), objectname) != chest_list.end())
+				{
+					// Element in vector.
+					if (hitlist.count(actorid) == 0) {
+						std::string myownstring = objectname;
+						myownstring += chest_list_number;
+						hitlist.insert(std::pair< uint32_t, std::string >(actorid, myownstring));
+						chest_list_number += 1;
+					}
+
+					continue;
+				}
+				else {
+
+					// Element not in vector.
+					std::cout << "pushing " << objectname.c_str() << std::endl;
+					chest_list.push_back(objectname.c_str());
 					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
 					continue;
 				}
@@ -694,9 +754,8 @@ void entityloop() {
 					continue;
 				}
 			}
-	
 
-			for (int i = 0; i < 73; i++) {
+			for (int i = 0; i < 72; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
