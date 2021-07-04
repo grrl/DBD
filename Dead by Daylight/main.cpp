@@ -369,7 +369,7 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[72] = {
+std::string searchlist[73] = {
 
 	"GeneratorHospital",
 	"GeneratorHospital_Anniversary2020_C",
@@ -444,7 +444,8 @@ std::string searchlist[72] = {
 	"Bookshelf_C",
 	"BP_Hatch01",
 	"BP_Hatch01_C",
-	"BP_BearTrap_001_C"
+	"BP_BearTrap_001_C",
+	"BP_FRM_Escape01_C"
 	//"ClosetStandard_Anniversary2020_C",
 	//"ClosetStandard_C",
 	//"BP_Wal_CatLocker_01_C"
@@ -706,6 +707,8 @@ void entityloop() {
 				DrawString((char*)"Leon Scott Kennedy", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
 			else if (search == "BP_CamperMale14_Character_C")
 				DrawString((char*)"BP_CamperMale14_Character_C", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_FRM_Escape01_C")
+				DrawString((char*)"Escape", PlayerScreenPos.X, PlayerScreenPos.Y, 238, 130, 238, dx_FontCalibri);
 			//else if (search.find("BP_Camper") != std::string::npos)
 			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
 			else if (search.find("BP_Hatch") != std::string::npos)
@@ -894,7 +897,7 @@ void entityloop() {
 				continue;
 			}
 
-			for (int i = 0; i < 72; i++) {
+			for (int i = 0; i < 73; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
