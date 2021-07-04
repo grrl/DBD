@@ -6,6 +6,8 @@
 #include <map>
 #include <vector>
 #include <algorithm>
+#include <sstream>
+
 #include "driver.h"
 #include "macro.h"
 #include "w2s.h"
@@ -369,7 +371,6 @@ uint32_t BP_Slasher_Character_23_C;
 
 std::string searchlist[72] = {
 
-	
 	"GeneratorHospital",
 	"GeneratorHospital_Anniversary2020_C",
 	"GeneratorStandard_C",
@@ -462,18 +463,18 @@ std::vector <std::string> totemlist(15);
 std::vector <std::string> pull_list(30);
 std::vector <std::string> bear_list(15);
 std::vector <std::string> chest_list(15);
-//std::vector <std::string> generator_list(20);
-
+std::map<float, int> genlist;
+std::map<float, int> ttlist;
 
 int totemlistnumber = 0;
 int pull_list_number = 0;
 int bear_list_number = 0;
 int chest_list_number = 0;
-//int generator_list_number = 0;
+int generator_number = 1;
+int totem_number = 1;
 //int book_list_number = 0;
 
 std::map<uint32_t, std::string> hitlist;
-
 
 //GeneratorLunarIndoors_C; GeneratorSuburbs_C; GeneratorStandard_C; GeneratorHospital_C; "
 void entityloop() {
@@ -510,15 +511,16 @@ void entityloop() {
 		pull_list.clear();
 		bear_list.clear();
 		chest_list.clear();
-		//generator_list.clear();
 		//book_list.clear();
 		totemlistnumber = 0;
 		pull_list_number = 0;
 		bear_list_number = 0;
 		chest_list_number = 0;
-		//generator_list_number = 0;
 		//book_list_number = 0;
 		hitlist.clear();
+		ttlist.clear();
+		generator_number = 1;
+		totem_number = 1;
 		return;
 	}
 
@@ -708,14 +710,59 @@ void entityloop() {
 			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
 			else if (search.find("BP_Hatch") != std::string::npos)
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
-			else if (search.find("BP_Totem") != std::string::npos)
-				DrawString((char*)"Totem", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
+			else if (search.find("BP_Totem") != std::string::npos) {
+
+				
+				if (ttlist.empty()) {
+					ttlist.insert(std::pair<float, int>(pos.GetX(), totem_number));
+					totem_number += 1;
+				}
+				else {
+					if (ttlist.count(pos.GetX()) == 0) {
+						ttlist.insert(std::pair<float, int>(pos.GetX(), totem_number));
+						totem_number += 1;
+					}
+					else {
+						int myint = ttlist.find(pos.GetX())->second;
+						std::string app_str = "Totem ";
+						std::stringstream tmp_stream;
+						tmp_stream << app_str << myint;
+						std::string myownstring = tmp_stream.str();
+
+						DrawString((char*)myownstring.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 0, dx_FontCalibri);
+					}
+				}
+
+			}
 			else if (search.find("BP_Chest") != std::string::npos)
 				DrawString((char*)"Chest", PlayerScreenPos.X, PlayerScreenPos.Y, 0, 191, 255, dx_FontCalibri);
 			else if (search.find("Bear") != std::string::npos)
 				DrawString((char*)"Beartrap", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
 			else if (search.find("BP_ConjoinedTwin_C") != std::string::npos)
 				DrawString((char*)"Twin", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
+			else if (search.find("Generator") != std::string::npos) {
+
+
+				if (genlist.empty()) {
+					genlist.insert(std::pair<float, int>(pos.GetX(), generator_number));
+					generator_number += 1;
+				}
+				else {
+					if (genlist.count(pos.GetX()) == 0) {
+						genlist.insert(std::pair<float, int>(pos.GetX(), generator_number));
+						generator_number += 1;
+					}
+					else {
+						int myint = genlist.find(pos.GetX())->second;
+						std::string app_str = "Generator ";
+						std::stringstream tmp_stream;
+						tmp_stream << app_str << myint;
+						std::string myownstring = tmp_stream.str();
+
+						DrawString((char*)myownstring.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
+					}
+				}
+			}
 			else
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 		}
@@ -727,8 +774,6 @@ void entityloop() {
 
 			//if (objectname.length() == 0)
 			//	continue;
-
-			//std::cout << "obj " << objectname.c_str() << std::endl;
 
 			//HERE HATCH
 			/*
@@ -768,32 +813,6 @@ void entityloop() {
 					continue;
 				}
 			}
-			/*
-			if (objectname[0] == 'G' && objectname[1] == 'e' && objectname[2] == 'n' && objectname[3] == 'e' && objectname[4] == 'r' && objectname[5] == 'a' && objectname[6] == 't' && objectname[7] == 'o' && objectname[8] == 'r') {
-
-
-				if (std::find(generator_list.begin(), generator_list.end(), objectname) != generator_list.end())
-				{
-					// Element in vector.
-					if (hitlist.count(actorid) == 0) {
-						std::string myownstring = objectname;
-						myownstring += generator_list_number;
-						hitlist.insert(std::pair< uint32_t, std::string >(actorid, myownstring));
-						generator_list_number += 1;
-					}
-
-					continue;
-				}
-				else {
-
-					// Element not in vector.
-					std::cout << "pushing " << objectname.c_str() << std::endl;
-					generator_list.push_back(objectname.c_str());
-					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
-					continue;
-				}
-			}
-			*/
 			if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' && objectname[3] == 'C' && objectname[4] == 'h' && objectname[5] == 'e') {
 
 
@@ -844,7 +863,7 @@ void entityloop() {
 			}
 			else if (objectname[0] == 'B' && objectname[1] == 'e' && objectname[2] == 'a' && objectname[3] == 'r') {
 				//std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
-			
+
 				if (std::find(bear_list.begin(), bear_list.end(), objectname) != bear_list.end())
 				{
 					// Element in vector.
@@ -866,8 +885,7 @@ void entityloop() {
 					continue;
 				}
 			}
-			else if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' && objectname[3] == 'C' && objectname[4] == 'o' && objectname[5] == 'n' && objectname[6] == 'j' && objectname[7] == 'o'
-				&& objectname[8] == 'i' && objectname[9] == 'n' && objectname[10] == 'e' && objectname[11] == 'd' && objectname[12] == 'T' && objectname[13] == 'w' && objectname[14] == 'i' && objectname[15] == 'n' && objectname[16] == '_') {
+			else if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' && objectname[3] == 'C' && objectname[4] == 'o' && objectname[5] == 'n' && objectname[6] == 'j' && objectname[7] == 'o' && objectname[8] == 'i' && objectname[9] == 'n' && objectname[10] == 'e' && objectname[11] == 'd' && objectname[12] == 'T' && objectname[13] == 'w' && objectname[14] == 'i' && objectname[15] == 'n' && objectname[16] == '_') {
 
 				if (hitlist.count(actorid) == 0) {
 					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
