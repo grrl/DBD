@@ -369,7 +369,7 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[73] = {
+std::string searchlist[72] = {
 
 	"GeneratorHospital",
 	"GeneratorHospital_Anniversary2020_C",
@@ -444,8 +444,10 @@ std::string searchlist[73] = {
 	"Bookshelf_C",
 	"BP_Hatch01",
 	"BP_Hatch01_C",
-	"BP_BearTrap_001_C",
-	"BP_FRM_Escape01_C"
+	"BP_BearTrap_001_C"
+	//"BP_FRM_Escape01_C",
+	//"BP_UKR_Escape01_C",
+	//"BP_TL_Bd_Escape101_C"
 	//"ClosetStandard_Anniversary2020_C",
 	//"ClosetStandard_C",
 	//"BP_Wal_CatLocker_01_C"
@@ -707,7 +709,7 @@ void entityloop() {
 				DrawString((char*)"Leon Scott Kennedy", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
 			else if (search == "BP_CamperMale14_Character_C")
 				DrawString((char*)"BP_CamperMale14_Character_C", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_FRM_Escape01_C")
+			else if (search.find("BP_EscapeBlocker_C") != std::string::npos)
 				DrawString((char*)"Escape", PlayerScreenPos.X, PlayerScreenPos.Y, 238, 130, 238, dx_FontCalibri);
 			//else if (search.find("BP_Camper") != std::string::npos)
 			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
@@ -888,6 +890,14 @@ void entityloop() {
 					continue;
 				}
 			}
+			else if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' && objectname[3] == 'E' && objectname[4] == 's' && objectname[5] == 'c' && objectname[6] == 'a' && objectname[7] == 'p' && objectname[8] == 'e' && objectname[9] == 'B') {
+				//BP_EscapeBlocker_C
+				if (hitlist.count(actorid) == 0) {
+					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
+				}
+
+				continue;
+			}
 			else if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' && objectname[3] == 'C' && objectname[4] == 'o' && objectname[5] == 'n' && objectname[6] == 'j' && objectname[7] == 'o' && objectname[8] == 'i' && objectname[9] == 'n' && objectname[10] == 'e' && objectname[11] == 'd' && objectname[12] == 'T' && objectname[13] == 'w' && objectname[14] == 'i' && objectname[15] == 'n' && objectname[16] == '_') {
 
 				if (hitlist.count(actorid) == 0) {
@@ -897,7 +907,7 @@ void entityloop() {
 				continue;
 			}
 
-			for (int i = 0; i < 73; i++) {
+			for (int i = 0; i < 72; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
