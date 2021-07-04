@@ -592,10 +592,120 @@ void entityloop() {
 
 			if (search == "Bookshelf_C")
 				DrawString((char*)"Bookshelf", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
-			else if (search.find("BP_Slasher") != std::string::npos || search == "Bp_Slasher_Character_20_C")
-				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search.find("BP_Camper") != std::string::npos)
-				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_01_C")
+				DrawString((char*)"Trapper", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_02_C")
+				DrawString((char*)"Wraith", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_03_C")
+				DrawString((char*)"Hillbilly", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_04_C")
+				DrawString((char*)"Nurse", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_05_C")
+				DrawString((char*)"Hag", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_06_C")
+				DrawString((char*)"Myers", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_07_C")
+				DrawString((char*)"Doctor", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_08_C")
+				DrawString((char*)"Huntress", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_09_C")
+				DrawString((char*)"Leatherface", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_10_C")
+				DrawString((char*)"Freddy", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_11_C")
+				DrawString((char*)"Pig", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_12_C")
+				DrawString((char*)"Clown", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_13_C")
+				DrawString((char*)"Spirit", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_14_C")
+				DrawString((char*)"Legion", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_15_C")
+				DrawString((char*)"Plague", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_16_C")
+				DrawString((char*)"Ghost Face", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_17_C")
+				DrawString((char*)"Demogorgon", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_18_C")
+				DrawString((char*)"Oni", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_19_C")
+				DrawString((char*)"Deathslinger", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_20_C")
+				DrawString((char*)"Pyramid Head", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "Bp_Slasher_Character_20_C")
+				DrawString((char*)"Trickster", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_21_C")
+				DrawString((char*)"Blight", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_22_C")
+				DrawString((char*)"Twins", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_23_C")
+				DrawString((char*)"Victor", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_24_C")
+				DrawString((char*)"Nemesis", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			//else if (search.find("BP_Slasher") != std::string::npos || search == "Bp_Slasher_Character_20_C")
+			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			else if (search == "BP_CamperFemale01_C")
+				DrawString((char*)"Meg Thomas", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale01_Character_C")
+				DrawString((char*)"Meg Thomas", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale02_Character_C")
+				DrawString((char*)"Claudette Morel", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale03_Character_C")
+				DrawString((char*)"Nea Karlsson", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale04_Character_C")
+				DrawString((char*)"Laurie Strode", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale05_Character_C")
+				DrawString((char*)"Feng Min", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale06_Character_C")
+				DrawString((char*)"Kate Denson", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale07_Character_C")
+				DrawString((char*)"Jane Romero", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale08_Character_C")
+				DrawString((char*)"Nancy Wheeler", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale09_Character_C")
+				DrawString((char*)"Yui Kimura", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale10_Character_C")
+				DrawString((char*)"Zarina Kassir", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale11_Character_C")
+				DrawString((char*)"Cheryl Mason", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale12_Character_C")
+				DrawString((char*)"Elodie Rakoto", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale13_Character_C")
+				DrawString((char*)"Yun-Jin Lee", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperFemale14_Character_C")
+				DrawString((char*)"Jill Valentine", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale01_C")
+				DrawString((char*)"Dwight Fairfield", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale01_Character_C")
+				DrawString((char*)"Dwight Fairfield", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale02_Character_C")
+				DrawString((char*)"Jake Park", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale03_Character_C")
+				DrawString((char*)"Ace Visconti", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale04_Character_C")
+				DrawString((char*)"William Bill Overbeck", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale05_Character_C")
+				DrawString((char*)"David King", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale06_Character_C")
+				DrawString((char*)"Quentin Smith", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale07_Character_C")
+				DrawString((char*)"David Tapp", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale08_Character_C")
+				DrawString((char*)"Adam Francis", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale09_Character_C")
+				DrawString((char*)"Jeffrey Jeff Johansen", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale10_Character_C")
+				DrawString((char*)"Ash J. Williams", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale11_Character_C")
+				DrawString((char*)"Steve Harrington", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale12_Character_C")
+				DrawString((char*)"Felix Richter", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale13_Character_C")
+				DrawString((char*)"Leon Scott Kennedy", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			else if (search == "BP_CamperMale14_Character_C")
+				DrawString((char*)"BP_CamperMale14_Character_C", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			//else if (search.find("BP_Camper") != std::string::npos)
+			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
 			else if (search.find("BP_Hatch") != std::string::npos)
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
 			else if (search.find("BP_Totem") != std::string::npos)
@@ -604,6 +714,8 @@ void entityloop() {
 				DrawString((char*)"Chest", PlayerScreenPos.X, PlayerScreenPos.Y, 0, 191, 255, dx_FontCalibri);
 			else if (search.find("Bear") != std::string::npos)
 				DrawString((char*)"Beartrap", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
+			else if (search.find("BP_ConjoinedTwin_C") != std::string::npos)
+				DrawString((char*)"Twin", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
 			else
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 		}
@@ -753,6 +865,15 @@ void entityloop() {
 					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
 					continue;
 				}
+			}
+			else if (objectname[0] == 'B' && objectname[1] == 'P' && objectname[2] == '_' && objectname[3] == 'C' && objectname[4] == 'o' && objectname[5] == 'n' && objectname[6] == 'j' && objectname[7] == 'o'
+				&& objectname[8] == 'i' && objectname[9] == 'n' && objectname[10] == 'e' && objectname[11] == 'd' && objectname[12] == 'T' && objectname[13] == 'w' && objectname[14] == 'i' && objectname[15] == 'n' && objectname[16] == '_') {
+
+				if (hitlist.count(actorid) == 0) {
+					hitlist.insert(std::pair< uint32_t, std::string >(actorid, objectname));
+				}
+
+				continue;
 			}
 
 			for (int i = 0; i < 72; i++) {
