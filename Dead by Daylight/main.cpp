@@ -585,7 +585,7 @@ void entityloop() {
 			std::string search = hitlist.find(actorid)->second;
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 
-			uint64 localrootcomp = Kernel::KeReadVirtualMemory<uint64>(playercharacter + rootcomponent); 
+			uint64 localrootcomp = Kernel::KeReadVirtualMemory<uint64>(playercharacter + rootcomponent);
 
 			if (EntityRootComp == NULL || EntityRootComp == localrootcomp)
 				continue;
@@ -605,146 +605,482 @@ void entityloop() {
 
 			float Distance = localpos.Distance(pos) / 100.f;
 
+			char result[15];
+			char buffer[5];
+			char printChar1[2] = "[";
+			char printChar2[4] = "m] ";
 			//std::cout << "hitlist " << search.c_str() << std::endl;
-			if (search.find("BP_Slasher") != std::string::npos) {
-				char result[15];
-				char buffer[5];
+
+			if (search == "Bookshelf_C")
+				DrawString((char*)"Bookshelf", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
+			else if (search == "BP_Slasher_Character_01_C") {
 				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
-				char printChar1[2] = "[";
-				char printChar2[4] = "m] ";
 
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
 				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				DrawString((char*)"Trapper", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
-			else if (search.find("BP_Camper") != std::string::npos) {
-				char result[15];
-				char buffer[5];
+			else if (search == "BP_Slasher_Character_02_C") {
 				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
-				char printChar1[2] = "[";
-				char printChar2[4] = "m] ";
 
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
-			}
-
-			if (search == "Bookshelf_C")
-				DrawString((char*)"Bookshelf", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_01_C")
-				DrawString((char*)"Trapper", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_02_C")
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Wraith", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_03_C")
+			}
+			else if (search == "BP_Slasher_Character_03_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Hillbilly", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_04_C")
+			}
+			else if (search == "BP_Slasher_Character_04_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Nurse", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_05_C")
+			}
+			else if (search == "BP_Slasher_Character_05_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Hag", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_06_C")
+			}
+			else if (search == "BP_Slasher_Character_06_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Myers", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_07_C")
+			}
+			else if (search == "BP_Slasher_Character_07_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Doctor", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_08_C")
+			}
+			else if (search == "BP_Slasher_Character_08_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Huntress", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_09_C")
+			}
+			else if (search == "BP_Slasher_Character_09_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Leatherface", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_10_C")
+			}
+			else if (search == "BP_Slasher_Character_10_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Freddy", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_11_C")
+			}
+			else if (search == "BP_Slasher_Character_11_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Pig", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_12_C")
+			}
+			else if (search == "BP_Slasher_Character_12_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Clown", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_13_C")
+			}
+			else if (search == "BP_Slasher_Character_13_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Spirit", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_14_C")
+			}
+			else if (search == "BP_Slasher_Character_14_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Legion", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_15_C")
+			}
+			else if (search == "BP_Slasher_Character_15_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Plague", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_16_C")
+			}
+			else if (search == "BP_Slasher_Character_16_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Ghost Face", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_17_C")
+			}
+			else if (search == "BP_Slasher_Character_17_C") {
+
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Demogorgon", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_18_C")
+			}
+			else if (search == "BP_Slasher_Character_18_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Oni", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_19_C")
+			}
+			else if (search == "BP_Slasher_Character_19_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Deathslinger", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_20_C")
+			}
+			else if (search == "BP_Slasher_Character_20_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Pyramid Head", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "Bp_Slasher_Character_20_C")
+			}
+			else if (search == "Bp_Slasher_Character_20_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Trickster", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_21_C")
+			}
+			else if (search == "BP_Slasher_Character_21_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Blight", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_22_C")
+			}
+			else if (search == "BP_Slasher_Character_22_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Twins", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_23_C")
+			}
+			else if (search == "BP_Slasher_Character_23_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Victor", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_24_C")
+			}
+			else if (search == "BP_Slasher_Character_24_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
 				DrawString((char*)"Nemesis", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+			}
 			//else if (search.find("BP_Slasher") != std::string::npos || search == "Bp_Slasher_Character_20_C")
 			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
-			else if (search == "BP_CamperFemale01_C")
+			else if (search == "BP_CamperFemale01_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Meg Thomas", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale01_Character_C")
+			}
+			else if (search == "BP_CamperFemale01_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Meg Thomas", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale02_Character_C")
+			}
+			else if (search == "BP_CamperFemale02_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Claudette Morel", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale03_Character_C")
+			}
+			else if (search == "BP_CamperFemale03_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Nea Karlsson", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale04_Character_C")
+			}
+			else if (search == "BP_CamperFemale04_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Laurie Strode", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale05_Character_C")
+			}
+			else if (search == "BP_CamperFemale05_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Feng Min", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale06_Character_C")
+			}
+			else if (search == "BP_CamperFemale06_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Kate Denson", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale07_Character_C")
+			}
+			else if (search == "BP_CamperFemale07_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Jane Romero", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale08_Character_C")
+			}
+			else if (search == "BP_CamperFemale08_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Nancy Wheeler", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale09_Character_C")
+			}
+			else if (search == "BP_CamperFemale09_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Yui Kimura", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale10_Character_C")
+			}
+			else if (search == "BP_CamperFemale10_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Zarina Kassir", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale11_Character_C")
+			}
+			else if (search == "BP_CamperFemale11_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Cheryl Mason", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale12_Character_C")
+			}
+			else if (search == "BP_CamperFemale12_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Elodie Rakoto", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale13_Character_C")
+			}
+			else if (search == "BP_CamperFemale13_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Yun-Jin Lee", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale14_Character_C")
+			}
+			else if (search == "BP_CamperFemale14_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Jill Valentine", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale01_C")
+			}
+			else if (search == "BP_CamperMale01_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Dwight Fairfield", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale01_Character_C")
+			}
+			else if (search == "BP_CamperMale01_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Dwight Fairfield", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale02_Character_C")
+			}
+			else if (search == "BP_CamperMale02_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Jake Park", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale03_Character_C")
+			}
+			else if (search == "BP_CamperMale03_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Ace Visconti", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale04_Character_C")
+			}
+			else if (search == "BP_CamperMale04_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"William Bill Overbeck", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale05_Character_C")
+			}
+			else if (search == "BP_CamperMale05_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"David King", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale06_Character_C")
+			}
+			else if (search == "BP_CamperMale06_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Quentin Smith", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale07_Character_C")
+			}
+			else if (search == "BP_CamperMale07_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"David Tapp", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale08_Character_C")
+			}
+			else if (search == "BP_CamperMale08_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Adam Francis", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale09_Character_C")
+			}
+			else if (search == "BP_CamperMale09_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Jeffrey Jeff Johansen", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale10_Character_C")
+			}
+			else if (search == "BP_CamperMale10_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Ash J. Williams", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale11_Character_C")
+			}
+			else if (search == "BP_CamperMale11_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Steve Harrington", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale12_Character_C")
+			}
+			else if (search == "BP_CamperMale12_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Felix Richter", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale13_Character_C")
+			}
+			else if (search == "BP_CamperMale13_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"Leon Scott Kennedy", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperMale14_Character_C")
+			}
+			else if (search == "BP_CamperMale14_Character_C") {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"BP_CamperMale14_Character_C", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			}
 			else if (search.find("BP_EscapeBlocker_C") != std::string::npos)
 				DrawString((char*)"Escape", PlayerScreenPos.X, PlayerScreenPos.Y, 238, 130, 238, dx_FontCalibri);
 			//else if (search.find("BP_Camper") != std::string::npos)
@@ -753,7 +1089,7 @@ void entityloop() {
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
 			else if (search.find("BP_Totem") != std::string::npos) {
 
-				
+
 				if (ttlist.empty()) {
 					ttlist.insert(std::pair<float, int>(pos.GetX(), totem_number));
 					totem_number += 1;
@@ -777,21 +1113,6 @@ void entityloop() {
 			}
 			else if (search.find("BP_Chest") != std::string::npos)
 				DrawString((char*)"Chest", PlayerScreenPos.X, PlayerScreenPos.Y, 0, 191, 255, dx_FontCalibri);
-			else if (search.find("Bear") != std::string::npos)
-				DrawString((char*)"Beartrap", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
-			else if (search.find("BP_ConjoinedTwin_C") != std::string::npos){
-				char result[15];
-				char buffer[5];
-				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
-				char printChar1[2] = "[";
-				char printChar2[4] = "m] ";
-
-				strcpy(result, printChar1); // copy string one into the result.
-				strcat(result, buffer); // append string two to the result.
-				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 99, 71, dx_FontCalibri);
-				DrawString((char*)"Twin", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
-			}
 			else if (search.find("Generator") != std::string::npos) {
 
 
@@ -814,6 +1135,17 @@ void entityloop() {
 						DrawString((char*)myownstring.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
 					}
 				}
+			}
+			else if (search.find("Bear") != std::string::npos)
+				DrawString((char*)"Beartrap", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
+			else if (search.find("BP_ConjoinedTwin_C") != std::string::npos) {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 99, 71, dx_FontCalibri);
+				DrawString((char*)"Twin", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
 			}
 			else
 				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 255, dx_FontCalibri);
