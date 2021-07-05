@@ -444,7 +444,7 @@ std::string searchlist[74] = {
 	"Bookshelf_C",
 	"BP_Hatch01",
 	"BP_Hatch01_C",
-	"BP_BearTrap_001_C"
+	"BP_BearTrap_001_C",
 	//"BP_FRM_Escape01_C",
 	//"BP_UKR_Escape01_C",
 	//"BP_TL_Bd_Escape101_C"
@@ -598,12 +598,21 @@ void entityloop() {
 			//if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
 			//	continue;
 
+			float Distance = localpos.Distance(pos) / 100.f;
+
+			if (search == "Bookshelf_C") {
+
+				if (Distance >= 30.f)
+					continue;
+			}
+			else if (search == "ClosetStandard_Anniversary2020_C" || search == "ClosetStandard_C") {
+				if (Distance >= 15.f)
+					continue;
+			}
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 
 			if (PlayerScreenPos.X == 0 || PlayerScreenPos.Y == 0)
 				continue;
-
-			float Distance = localpos.Distance(pos) / 100.f;
 
 			char result[15];
 			char buffer[5];
@@ -611,36 +620,28 @@ void entityloop() {
 			char printChar2[4] = "m] ";
 			//std::cout << "hitlist " << search.c_str() << std::endl;
 
-			if (search == "Bookshelf_C"){
+			if (search == "Bookshelf_C") {
 
-				if (Distance >= 20.f)
-					continue;
-				else {
-					
-					int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
-					strcpy(result, printChar1); // copy string one into the result.
-					strcat(result, buffer); // append string two to the result.
-					strcat(result, printChar2); // append string two to the result.
-					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 77, 5, 232, dx_FontCalibri);
-					
-					DrawString((char*)"Bookshelf", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
-				}
+
+
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 77, 5, 232, dx_FontCalibri);
+
+				DrawString((char*)"Bookshelf", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
 			}
-			/*
 			else if (search == "ClosetStandard_Anniversary2020_C" || search == "ClosetStandard_C") {
-				if (Distance >= 15.f)
-					continue;
-				else {
-					int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
 
-					strcpy(result, printChar1); // copy string one into the result.
-					strcat(result, buffer); // append string two to the result.
-					strcat(result, printChar2); // append string two to the result.
-					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 106, 90, 205, dx_FontCalibri);
-					DrawString((char*)"Closet", PlayerScreenPos.X, PlayerScreenPos.Y, 106, 90, 205, dx_FontCalibri);
-				}
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 106, 90, 205, dx_FontCalibri);
+				DrawString((char*)"Closet", PlayerScreenPos.X, PlayerScreenPos.Y, 106, 90, 205, dx_FontCalibri);
 			}
-			*/
 			else if (search == "BP_Slasher_Character_01_C") {
 				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
 
