@@ -616,17 +616,18 @@ void entityloop() {
 				if (Distance >= 30.f)
 					continue;
 				else {
-				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
-
-				strcpy(result, printChar1); // copy string one into the result.
-				strcat(result, buffer); // append string two to the result.
-				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 77, 5, 232, dx_FontCalibri);
-				DrawString((char*)"Bookshelf", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
+					
+					int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+					strcpy(result, printChar1); // copy string one into the result.
+					strcat(result, buffer); // append string two to the result.
+					strcat(result, printChar2); // append string two to the result.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 77, 5, 232, dx_FontCalibri);
+					
+					DrawString((char*)"Bookshelf", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
 				}
 			}
 			else if (search == "ClosetStandard_Anniversary2020_C" || search == "ClosetStandard_C") {
-				if (Distance >= 30.f)
+				if (Distance >= 15.f)
 					continue;
 				else {
 					int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
@@ -1106,12 +1107,25 @@ void entityloop() {
 				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 255, 255, dx_FontCalibri);
 				DrawString((char*)"BP_CamperMale14_Character_C", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
 			}
-			else if (search.find("BP_EscapeBlocker_C") != std::string::npos)
+			else if (search == "BP_Hatch01" || search == "BP_Hatch01_C") {
+
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 0, 230, 64, dx_FontCalibri);
+				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
+			}
+			else if (search.find("BP_EscapeBlocker_C") != std::string::npos) {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 238, 130, 238, dx_FontCalibri);
 				DrawString((char*)"Escape", PlayerScreenPos.X, PlayerScreenPos.Y, 238, 130, 238, dx_FontCalibri);
+			}
 			//else if (search.find("BP_Camper") != std::string::npos)
 			//	DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search.find("BP_Hatch") != std::string::npos)
-				DrawString((char*)search.c_str(), PlayerScreenPos.X, PlayerScreenPos.Y, 0, 230, 64, dx_FontCalibri);
 			else if (search.find("BP_Totem") != std::string::npos) {
 
 
