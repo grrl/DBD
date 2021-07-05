@@ -369,7 +369,7 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[72] = {
+std::string searchlist[74] = {
 
 	"GeneratorHospital",
 	"GeneratorHospital_Anniversary2020_C",
@@ -448,8 +448,8 @@ std::string searchlist[72] = {
 	//"BP_FRM_Escape01_C",
 	//"BP_UKR_Escape01_C",
 	//"BP_TL_Bd_Escape101_C"
-	//"ClosetStandard_Anniversary2020_C",
-	//"ClosetStandard_C",
+	"ClosetStandard_Anniversary2020_C",
+	"ClosetStandard_C"
 	//"BP_Wal_CatLocker_01_C"
 
 	//"BP_TotemBase_C"
@@ -611,8 +611,33 @@ void entityloop() {
 			char printChar2[4] = "m] ";
 			//std::cout << "hitlist " << search.c_str() << std::endl;
 
-			if (search == "Bookshelf_C")
+			if (search == "Bookshelf_C"){
+
+				if (Distance >= 30.f)
+					continue;
+				else {
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 77, 5, 232, dx_FontCalibri);
 				DrawString((char*)"Bookshelf", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
+				}
+			}
+			else if (search == "ClosetStandard_Anniversary2020_C" || search == "ClosetStandard_C") {
+				if (Distance >= 30.f)
+					continue;
+				else {
+					int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+					strcpy(result, printChar1); // copy string one into the result.
+					strcat(result, buffer); // append string two to the result.
+					strcat(result, printChar2); // append string two to the result.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 106, 90, 205, dx_FontCalibri);
+					DrawString((char*)"Closet", PlayerScreenPos.X, PlayerScreenPos.Y, 106, 90, 205, dx_FontCalibri);
+				}
+			}
 			else if (search == "BP_Slasher_Character_01_C") {
 				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
 
@@ -1286,7 +1311,7 @@ void entityloop() {
 				continue;
 			}
 
-			for (int i = 0; i < 72; i++) {
+			for (int i = 0; i < 74; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
