@@ -549,8 +549,11 @@ void entityloop() {
 
 	auto playercontroller = Kernel::KeReadVirtualMemory<uintptr_t>(localplayerFinal + PlayerController);
 
-	//uint64_t apawn = Kernel::KeReadVirtualMemory<uint64_t>(playercontroller + 0x268);
 
+	uint64_t playercharacter = Kernel::KeReadVirtualMemory<uintptr_t>(playercontroller + 0x278);
+
+	//std::cout << "playercharacter " << playercharacter << std::endl;
+	//uint64_t apawn = Kernel::KeReadVirtualMemory<uintptr_t>(playercontroller + 0x268);
 	//std::cout << "apawn " << apawn << std::endl;
 
 	auto PlayerCamera = Kernel::KeReadVirtualMemory<uintptr_t>(playercontroller + 0x2D0);
@@ -563,6 +566,7 @@ void entityloop() {
 	{
 
 		uint64_t CurrentActor = Kernel::KeReadVirtualMemory<uint64_t>(actors + (static_cast<uint64_t>(i) * 0x8));
+
 		//uint64_t CurrentActor = read<uint64_t>(Managers::EntityList + ActorNum * 0x8);
 		if (CurrentActor == (uint64_t)nullptr || CurrentActor == -1 || CurrentActor == NULL)
 			continue;
@@ -581,9 +585,19 @@ void entityloop() {
 			std::string search = hitlist.find(actorid)->second;
 			uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(CurrentActor + rootcomponent);
 
+			uint64 localrootcomp = Kernel::KeReadVirtualMemory<uint64>(playercharacter + rootcomponent); 
+
 			if (EntityRootComp == NULL)
 				continue;
+
+			//std::cout << "entroot " << EntityRootComp << " localroot " << localrootcomp << std::endl;
+
+			if (EntityRootComp == localrootcomp) {
+				std::cout << "localplayer is " << EntityRootComp << " id " << actorid << std::endl;
+			}
+
 			FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+			FVector localpos = Kernel::KeReadVirtualMemory<FVector>(localrootcomp + relativelocation);
 
 			//if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
 			//	continue;
@@ -593,12 +607,29 @@ void entityloop() {
 			if (PlayerScreenPos.X == 0 || PlayerScreenPos.Y == 0)
 				continue;
 
+			float Distance = localpos.Distance(pos) / 100.f;
+
 			//std::cout << "hitlist " << search.c_str() << std::endl;
+			char result[15];
+			if (search.find("BP_Slasher") != std::string::npos) {
+				char buffer[5];
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				char printChar1[2] = "[";
+				char printChar2[4] = "m] ";
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+			}
 
 			if (search == "Bookshelf_C")
 				DrawString((char*)"Bookshelf", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
-			else if (search == "BP_Slasher_Character_01_C")
+			else if (search == "BP_Slasher_Character_01_C"){
+				std::string myownstring = "Trapper ";
+				myownstring += result;
 				DrawString((char*)"Trapper", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+			}
 			else if (search == "BP_Slasher_Character_02_C")
 				DrawString((char*)"Wraith", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			else if (search == "BP_Slasher_Character_03_C")
@@ -657,8 +688,10 @@ void entityloop() {
 				DrawString((char*)"Claudette Morel", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
 			else if (search == "BP_CamperFemale03_Character_C")
 				DrawString((char*)"Nea Karlsson", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
-			else if (search == "BP_CamperFemale04_Character_C")
+			else if (search == "BP_CamperFemale04_Character_C"){
+				//std::cout << "number " << actorid << std::endl;
 				DrawString((char*)"Laurie Strode", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
+			}
 			else if (search == "BP_CamperFemale05_Character_C")
 				DrawString((char*)"Feng Min", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 255, 255, dx_FontCalibri);
 			else if (search == "BP_CamperFemale06_Character_C")
