@@ -779,8 +779,19 @@ void entityloop() {
 				DrawString((char*)"Chest", PlayerScreenPos.X, PlayerScreenPos.Y, 0, 191, 255, dx_FontCalibri);
 			else if (search.find("Bear") != std::string::npos)
 				DrawString((char*)"Beartrap", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
-			else if (search.find("BP_ConjoinedTwin_C") != std::string::npos)
+			else if (search.find("BP_ConjoinedTwin_C") != std::string::npos){
+				char result[15];
+				char buffer[5];
+				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				char printChar1[2] = "[";
+				char printChar2[4] = "m] ";
+
+				strcpy(result, printChar1); // copy string one into the result.
+				strcat(result, buffer); // append string two to the result.
+				strcat(result, printChar2); // append string two to the result.
+				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 99, 71, dx_FontCalibri);
 				DrawString((char*)"Twin", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 99, 71, dx_FontCalibri);
+			}
 			else if (search.find("Generator") != std::string::npos) {
 
 
