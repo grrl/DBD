@@ -613,7 +613,7 @@ void entityloop() {
 
 			if (search == "Bookshelf_C"){
 
-				if (Distance >= 30.f)
+				if (Distance >= 20.f)
 					continue;
 				else {
 					
@@ -626,6 +626,7 @@ void entityloop() {
 					DrawString((char*)"Bookshelf", PlayerScreenPos.X, PlayerScreenPos.Y, 77, 5, 232, dx_FontCalibri);
 				}
 			}
+			/*
 			else if (search == "ClosetStandard_Anniversary2020_C" || search == "ClosetStandard_C") {
 				if (Distance >= 15.f)
 					continue;
@@ -639,6 +640,7 @@ void entityloop() {
 					DrawString((char*)"Closet", PlayerScreenPos.X, PlayerScreenPos.Y, 106, 90, 205, dx_FontCalibri);
 				}
 			}
+			*/
 			else if (search == "BP_Slasher_Character_01_C") {
 				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
 
@@ -1260,6 +1262,7 @@ void entityloop() {
 					continue;
 				}
 			}
+			/*
 			else if (objectname[0] == 'p' && objectname[1] == 'u' && objectname[2] == 'l' && objectname[3] == 'l' || objectname[0] == 'P' && objectname[1] == 'u' && objectname[2] == 'l' && objectname[3] == 'l') {
 				//std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
 
@@ -1284,6 +1287,7 @@ void entityloop() {
 					continue;
 				}
 			}
+			*/
 			else if (objectname[0] == 'B' && objectname[1] == 'e' && objectname[2] == 'a' && objectname[3] == 'r') {
 				//std::cout << objectname[0] << objectname[1] << objectname[2] << std::endl;
 
