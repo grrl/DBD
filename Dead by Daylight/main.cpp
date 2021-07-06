@@ -609,6 +609,10 @@ void entityloop() {
 				if (Distance >= 15.f)
 					continue;
 			}
+			else if (search == "BP_Chest") {
+				if (Distance >= 30.f)
+					continue;
+			}
 			FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
 
 			if (PlayerScreenPos.X == 0 || PlayerScreenPos.Y == 0)
