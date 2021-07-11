@@ -369,7 +369,7 @@ uint32_t BP_Slasher_Character_23_C;
 	"Chest-Basement-BP_TL_St_32x32_Foundry01_C",
 */
 
-std::string searchlist[74] = {
+std::string searchlist[77] = {
 
 	"GeneratorHospital",
 	"GeneratorHospital_Anniversary2020_C",
@@ -449,7 +449,11 @@ std::string searchlist[74] = {
 	//"BP_UKR_Escape01_C",
 	//"BP_TL_Bd_Escape101_C"
 	"ClosetStandard_Anniversary2020_C",
-	"ClosetStandard_C"
+	"ClosetStandard_C",
+	"BP_Toolbox_003_C",
+	"BP_Item_Camper_DullKey_C",
+	"BP_Item_Camper_Key_C"
+
 	//"BP_Wal_CatLocker_01_C"
 
 	//"BP_TotemBase_C"
@@ -1334,7 +1338,7 @@ void entityloop() {
 				continue;
 			}
 
-			for (int i = 0; i < 74; i++) {
+			for (int i = 0; i < 77; i++) {
 
 				if (searchlist[i] == objectname) {
 					if (hitlist.count(actorid) == 0) //if not add to searchlist
