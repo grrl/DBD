@@ -238,22 +238,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	return 0;
 }
 
-FTransform GetBoneIndex(QWORD dwbonemesh, int indexnum)
-{
-	QWORD bonearray = Kernel::KeReadVirtualMemory<QWORD>(dwbonemesh + 0x1E0);
-	return Kernel::KeReadVirtualMemory<FTransform>(bonearray + (indexnum * 0x30));
-}
-
-FVector GetBoneWithRotation(QWORD dwbonemesh, int boneindexnum)
-{
-	FTransform bone = GetBoneIndex(dwbonemesh, boneindexnum);
-	FTransform ComponentToWorld = Kernel::KeReadVirtualMemory<FTransform>(dwbonemesh + 0x164);
-	D3DMATRIX Matrix;
-	Matrix = MatrixMultiplication(bone.ToMatrixWithScale(), ComponentToWorld.ToMatrixWithScale());
-
-	return FVector(Matrix._41, Matrix._42, Matrix._43);
-}
-
 bool isReverse(uintptr_t SkillCheck) {
 	float rotation = Kernel::KeReadVirtualMemory<float>(SkillCheck + 0x2E0);
 	if (rotation < 0.0f) {
@@ -483,7 +467,102 @@ int totem_number = 1;
 
 std::map<uint32_t, std::string> hitlist;
 
-//GeneratorLunarIndoors_C; GeneratorSuburbs_C; GeneratorStandard_C; GeneratorHospital_C; "
+bool smooth = false;
+
+
+void AimAtPos(float x, float y)
+{
+	//By fredaikis
+	float ScreenCenterX = (clientWidth / 2);
+	float ScreenCenterY = (clientHeight / 2);
+	float TargetX = 0;
+	float TargetY = 0;
+	float AimSpeed = 1.0f;
+	//smooth = float_rand(0.f, 0.8f);
+	if (x != 0)
+	{
+		if (x > ScreenCenterX)
+		{
+			TargetX = -(ScreenCenterX - x);
+			TargetX /= AimSpeed;
+			if (TargetX + ScreenCenterX > ScreenCenterX * 2) TargetX = 0;
+		}
+
+		if (x < ScreenCenterX)
+		{
+			TargetX = x - ScreenCenterX;
+			TargetX /= AimSpeed;
+			if (TargetX + ScreenCenterX < 0) TargetX = 0;
+		}
+	}
+	if (y != 0)
+	{
+		if (y > ScreenCenterY)
+		{
+			TargetY = -(ScreenCenterY - y);
+			TargetY /= AimSpeed;
+			if (TargetY + ScreenCenterY > ScreenCenterY * 2) TargetY = 0;
+		}
+
+		if (y < ScreenCenterY)
+		{
+			TargetY = y - ScreenCenterY;
+			TargetY /= AimSpeed;
+			if (TargetY + ScreenCenterY < 0) TargetY = 0;
+		}
+	}
+	if (!smooth)
+	{
+		mouse_event(0x0001, (TargetX), (TargetY), NULL, NULL);
+		return;
+	}
+
+	float r = 5.0;
+
+	TargetX /= r; //10
+	TargetY /= r; //10
+	if (abs(TargetX) < 1)
+	{
+		if (TargetX > 0)
+		{
+			TargetX = 1;
+		}
+		if (TargetX < 0)
+		{
+			TargetX = -1;
+		}
+	}
+	if (abs(TargetY) < 1)
+	{
+		if (TargetY > 0)
+		{
+			TargetY = 1;
+		}
+		if (TargetY < 0)
+		{
+			TargetY = -1;
+		}
+	}
+	mouse_event(0x0001, TargetX, TargetY, NULL, NULL);
+}
+
+FTransform GetBoneIndex(QWORD dwbonemesh, int indexnum)
+{
+	QWORD bonearray = Kernel::KeReadVirtualMemory<QWORD>(dwbonemesh + 0x4A0);
+	std::cout << "bonearray " << bonearray << std::endl;
+	return Kernel::KeReadVirtualMemory<FTransform>(bonearray + (indexnum * 0x30));
+}
+
+FVector GetBoneWithRotation(QWORD dwbonemesh, int boneindexnum)
+{
+	FTransform bone = GetBoneIndex(dwbonemesh, boneindexnum);
+	FTransform ComponentToWorld = Kernel::KeReadVirtualMemory<FTransform>(dwbonemesh + 0x1E0);
+	D3DMATRIX Matrix;
+	Matrix = MatrixMultiplication(bone.ToMatrixWithScale(), ComponentToWorld.ToMatrixWithScale());
+
+	return FVector(Matrix._41, Matrix._42, Matrix._43);
+}
+
 void entityloop() {
 
 	uworld = Kernel::KeReadVirtualMemory<QWORD>(Kernel::GameModule + uworld_offset);
@@ -565,6 +644,73 @@ void entityloop() {
 
 	auto CameraCacheEntry = Kernel::KeReadVirtualMemory<FMinimalViewInfo>(PlayerCamera + 0x1A80);
 
+
+	if (GetAsyncKeyState(VK_RBUTTON) & 0x8000) {
+		std::string search = hitlist.find(3550936)->second;
+		uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(2347350982784 + rootcomponent);
+
+		uint64 localrootcomp = Kernel::KeReadVirtualMemory<uint64>(playercharacter + rootcomponent);
+
+		FVector vHeadPos = GetBoneWithRotation(EntityRootComp, 66);
+		std::cout << "headpos " << vHeadPos.X << " " << vHeadPos.Y << " " << vHeadPos.Z << std::endl;
+		FVector vW2SHead = WorldToScreen(CameraCacheEntry, vHeadPos);
+		std::cout << "vW2SHead " << vW2SHead.X << " " << vW2SHead.Y << std::endl;
+
+		FVector pos = Kernel::KeReadVirtualMemory<FVector>(EntityRootComp + relativelocation);
+		//std::cout << "normalpos " << pos.X << " " << pos.Y << " " << pos.Z << std::endl;
+
+		FVector localpos = Kernel::KeReadVirtualMemory<FVector>(localrootcomp + relativelocation);
+
+		//if (pos.X == 0 || pos.Y == 0 || pos.Z == 0)
+		//	continue;
+
+		float Distance = localpos.Distance(pos) / 100.f;
+
+		if (Distance > 10.f)
+			return;
+
+		FVector PlayerScreenPos = WorldToScreen(CameraCacheEntry, pos);
+		std::cout << "PlayerScreenPos " << PlayerScreenPos.X << " " << PlayerScreenPos.Y <<  std::endl;
+
+
+		char result[15];
+		char buffer[5];
+		char printChar1[2] = "[";
+		char printChar2[4] = "m] ";
+
+		/*
+		Vector3 center_screen;
+		center_screen.x = clientWidth / 2;
+		center_screen.y = clientHeight / 2;
+		Vector3 Aimpos;
+		Aimpos.x = vW2SHead.X;
+		Aimpos.y = vW2SHead.Y + 150;
+
+		float radiusx = (45) * (center_screen.x / 100.0f);
+		float radiusy = (45) * (center_screen.y / 100.0f);
+
+		//std::cout << "aimpos " << Aimpos.x << " " << Aimpos.y << "\n";
+		if (Aimpos.x >= center_screen.x - radiusx && Aimpos.x <= center_screen.x + radiusx && Aimpos.y >= center_screen.y - radiusy && Aimpos.y <= center_screen.y + radiusy) {
+			std::cout << "working " << Aimpos.x << " " << Aimpos.y << "\n";
+			//if (GetAsyncKeyState(VK_XBUTTON1) & 0x8000)
+			AimAtPos(Aimpos.x, Aimpos.y);
+			Sleep(300);
+		}
+		*/
+
+		//AimAtPos(vW2SHead.X, vW2SHead.Y + 100);
+		int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+
+		strcpy(result, printChar1); // copy string one into the result.
+		strcat(result, buffer); // append string two to the result.
+		strcat(result, printChar2); // append string two to the result.
+		DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+		DrawString((char*)"Trapper", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+
+		Sleep(300);
+
+		return;
+	}
 
 	for (int i = 0; i < actor_count; i++)
 	{
@@ -652,7 +798,19 @@ void entityloop() {
 			}
 			else if (search == "BP_Slasher_Character_01_C") {
 				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
+				std::cout << "killer actorid " << CurrentActor << std::endl;
+				std::cout << "killer actorid " << actorid << std::endl;
 
+				/*
+				if (Distance <= 10.f) {
+
+					std::cout << "killer actorid " << CurrentActor << std::endl;
+
+					if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
+						AimAtPos(PlayerScreenPos.X, PlayerScreenPos.Y);
+
+				}
+				*/
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
