@@ -644,7 +644,7 @@ void entityloop() {
 
 	auto CameraCacheEntry = Kernel::KeReadVirtualMemory<FMinimalViewInfo>(PlayerCamera + 0x1A80);
 
-
+	/*
 	if (GetAsyncKeyState(VK_RBUTTON) & 0x8000) {
 		std::string search = hitlist.find(3550936)->second;
 		uint64 EntityRootComp = Kernel::KeReadVirtualMemory<uint64>(2347350982784 + rootcomponent);
@@ -696,7 +696,7 @@ void entityloop() {
 			AimAtPos(Aimpos.x, Aimpos.y);
 			Sleep(300);
 		}
-		*/
+		
 
 		//AimAtPos(vW2SHead.X, vW2SHead.Y + 100);
 		int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
@@ -711,6 +711,7 @@ void entityloop() {
 
 		return;
 	}
+	*/
 
 	for (int i = 0; i < actor_count; i++)
 	{
@@ -798,24 +799,16 @@ void entityloop() {
 			}
 			else if (search == "BP_Slasher_Character_01_C") {
 				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
-				std::cout << "killer actorid " << CurrentActor << std::endl;
-				std::cout << "killer actorid " << actorid << std::endl;
 
-				/*
-				if (Distance <= 10.f) {
-
-					std::cout << "killer actorid " << CurrentActor << std::endl;
-
-					if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
-						AimAtPos(PlayerScreenPos.X, PlayerScreenPos.Y);
-
-				}
-				*/
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
-				DrawString((char*)"Trapper", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				DrawString((char*)"Trapper", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_02_C") {
 				int ret = snprintf(buffer, sizeof buffer, "%f", Distance);
@@ -823,7 +816,13 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else{
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}
 				DrawString((char*)"Wraith", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_03_C") {
@@ -832,7 +831,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Hillbilly", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_04_C") {
@@ -841,7 +845,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Nurse", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_05_C") {
@@ -850,7 +859,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Hag", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_06_C") {
@@ -859,7 +873,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Myers", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_07_C") {
@@ -868,7 +887,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Doctor", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_08_C") {
@@ -877,7 +901,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Huntress", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_09_C") {
@@ -886,7 +915,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Leatherface", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_10_C") {
@@ -895,7 +929,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Freddy", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_11_C") {
@@ -904,7 +943,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Pig", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_12_C") {
@@ -913,7 +957,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Clown", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_13_C") {
@@ -922,7 +971,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Spirit", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_14_C") {
@@ -931,7 +985,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Legion", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_15_C") {
@@ -940,7 +999,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Plague", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_16_C") {
@@ -949,7 +1013,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Ghost Face", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_17_C") {
@@ -959,7 +1028,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Demogorgon", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_18_C") {
@@ -968,7 +1042,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}				
 				DrawString((char*)"Oni", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_19_C") {
@@ -977,7 +1056,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}
 				DrawString((char*)"Deathslinger", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_20_C") {
@@ -986,7 +1070,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}
 				DrawString((char*)"Pyramid Head", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "Bp_Slasher_Character_20_C") {
@@ -995,7 +1084,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}
 				DrawString((char*)"Trickster", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_21_C") {
@@ -1004,7 +1098,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}
 				DrawString((char*)"Blight", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_22_C") {
@@ -1013,7 +1112,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}
 				DrawString((char*)"Twins", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_23_C") {
@@ -1022,7 +1126,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}
 				DrawString((char*)"Victor", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			else if (search == "BP_Slasher_Character_24_C") {
@@ -1031,7 +1140,12 @@ void entityloop() {
 				strcpy(result, printChar1); // copy string one into the result.
 				strcat(result, buffer); // append string two to the result.
 				strcat(result, printChar2); // append string two to the result.
-				DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				if (Distance > 10.f)
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 255, 0, 0, dx_FontCalibri);
+				else {
+					DrawString((char*)result, 10, 20, 50, 205, 50, dx_FontCalibri); // Put Main procedure here like ESP etc.
+					DrawString((char*)result, PlayerScreenPos.X, PlayerScreenPos.Y + 10, 50, 205, 50, dx_FontCalibri);
+				}
 				DrawString((char*)"Nemesis", PlayerScreenPos.X, PlayerScreenPos.Y, 255, 0, 0, dx_FontCalibri);
 			}
 			//else if (search.find("BP_Slasher") != std::string::npos || search == "Bp_Slasher_Character_20_C")
